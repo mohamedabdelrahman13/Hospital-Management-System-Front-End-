@@ -1,0 +1,18 @@
+<!-- <h1>{{dateInp.value}}</h1> -->
+<h1>{{timeInp.type}}</h1>
+<!-- <mat-form-field class="example-full-width">
+  <mat-label>Choose a date</mat-label>
+  <input matInput [matDatepicker]="picker" #dateInp [(ngModel)]="date">
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker">
+    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+  </mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field> -->
+
+<mat-form-field>
+  <mat-label>Pick a time</mat-label>
+  <input panelClass="my-custom-panel"  matInput [matTimepicker]="picker" #timeInp [(ngModel)]="time">
+  <mat-timepicker-toggle matIconSuffix [for]="picker"/>
+  <mat-timepicker  panelClass="my-custom-panel" #picker/>
+</mat-form-field>
