@@ -1,0 +1,64 @@
+<mat-sidenav-container class="sidenav-container ">
+  <!-- Sidebar -->
+  <mat-sidenav style="background-color: rgb(208, 207, 207); width: 250px; padding: 1rem;" class="sidenav border-3" #drawer mode="side"
+    [(opened)]="isSidebarOpen">
+    <mat-nav-list>
+      <div class="d-flex justify-content-center">
+        <button class="btn d-flex flex-row justify-content-between mb-3 " [routerLink]="['/patient']">
+          <span>Appointment</span>
+          <mat-icon class="mx-2">add</mat-icon>
+        </button>
+      </div>
+      <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+        <mat-icon matListItemIcon class="mx-2">dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </a>
+      <a mat-list-item [routerLink]="['/patient']" routerLinkActive="router-link-active">
+        <mat-icon matListItemIcon class="mx-2">sick</mat-icon>
+        <span matListItemTitle>Patients</span>
+      </a>
+      <a mat-list-item [routerLink]="['/doctor']" routerLinkActive="router-link-active">
+        <mat-icon matListItemIcon class="mx-2">medical_services</mat-icon>
+        <span matListItemTitle>Doctors</span>
+      </a>
+      <a mat-list-item [routerLink]="['/department']" routerLinkActive="router-link-active">
+        <mat-icon matListItemIcon class="mx-2">apartment</mat-icon>
+        <span matListItemTitle>Department</span>
+      </a>
+      <a mat-list-item [routerLink]="['/login']">
+        <mat-icon matListItemIcon class="mx-2">logout</mat-icon>
+        <span matListItemTitle>Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+
+  <!-- Main content -->
+  <mat-sidenav-content>
+    <mat-toolbar style="padding: 0; margin: 0;" color="primary">
+      <button class="m-0" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon *ngIf="!isSidebarOpen">menu</mat-icon>
+        <mat-icon *ngIf="isSidebarOpen">close</mat-icon>
+      </button>
+      <header class="mb-3 w-100">
+        <div class="d-flex justify-content-between py-2 px-5">
+          <div class="img">
+            <img src="assets/hospital-logo.jpg" width="40" height="40" alt="Logo" class="logo ms-2">
+            <span class="app-name ms-2 fs-5">Hospital System</span>
+          </div>
+          <!-- <span class="spacer"></span> -->
+  
+  
+          <div class="user-info d-flex align-items-center">
+            <mat-icon>account_circle</mat-icon>
+            <span >Welcome, Mohamed</span>
+          </div>
+        </div>
+      </header>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

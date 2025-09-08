@@ -1,0 +1,84 @@
+    <Header>
+        <div class="title">
+            <h2  class="text-center  display-5 fw-bold">Book Appointment</h2>
+            <span class="line"></span>
+        </div>
+    </Header>
+    <form [formGroup]="appointmentForm" (ngSubmit)="OnSubmit()">
+        <!-- <legend class="text-center text-bold my-3">Book an appointment</legend> -->
+        <span>Note : Available Appointments :</span> 
+        <h6 class="fw-lighter text-success text-decoration-underline"> <br> 
+        <small *ngIf="doctor">
+            @for( ch of doctor.consultationHours ; track ch.id; let last = $last){
+            {{ ch.dayOfWeek }} ({{ ch.startTime }} to {{ ch.endTime }})<span *ngIf="!last">, </span> <br>
+            }
+        </small>
+        </h6>
+        <div class="row mb-3">
+            <div class="mb-3 col-md-6">
+                <label for="doctorName" class="form-label">Doctor</label>
+                <input type="text" id="doctorName" class="form-control" [value]="doctorName" disabled>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="speciality" class="form-label">Speciality</label>
+                <input type="text" id="speciality" class="form-control" [value]="speciality" disabled>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="patientName" class="form-label">Patient</label>
+            <input type="text" id="patientName" class="form-control" [value]="patientName" disabled>
+        </div>
+        <div class="mb-3">
+            <small class="fw-lighter text-secondary text-decoration-underline mb-5">please pick a corresponding date to the days available mentioned at the top</small>
+            <div class="mb-3">
+                <input type="date" class="form-control" formControlName="date" id="date" placeholder="appointment date">
+            </div>
+          </div>
+        <div class="mb-3">
+            <!-- Start Time -->
+            <label>Start Time:</label>
+            <timepicker [minuteStep]="30" formControlName="startTime" [showMeridian]="false"></timepicker>
+
+            <!-- End Time -->
+            <label>End Time:</label>
+            <timepicker formControlName="endTime"
+             [showMeridian]="false"></timepicker>
+
+        </div>
+        <!-- 
+         <div class="mb-3">
+            <label for="startTime"></label>
+            <timepicker id="startTime" [(ngModel)]="mytime" formControlName="startTime" [hourStep]="hstep" [minuteStep]="mstep" [showSeconds]="true"
+                [secondsStep]="sstep"></timepicker>
+
+            <pre class="alert alert-info">Time is: {{mytime}}</pre>
+        </div> -->
+        <!-- <mat-form-field appearance="fill">
+                <mat-label>Choose Appointment Date</mat-label>
+                <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [formControl]="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+               -->
+
+        <!-- for submitting the form  -->
+        <input type="hidden" formControlName="doctorId">
+        <input type="hidden" formControlName="patientId">
+        <input type="hidden" formControlName="speciality">
+
+
+
+        <!-- <div class="mb-3">
+            <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Phone number">
+            <div *ngIf="appointmentForm.get('phone')?.touched && appointmentForm.get('phone')?.invalid" class="text-danger">
+                <small *ngIf="appointmentForm.get('phone')?.errors?.['required']">phone is required</small>
+                <small *ngIf="appointmentForm.get('phone')?.errors?.['pattern']">phone must be characters only</small>
+                <small *ngIf="appointmentForm.get('phone')?.errors?.['pattern']">phone must be 11 characters</small>
+            </div>
+        </div> -->
+
+        <div class="submit-btn">
+            <button class="btn btn-primary" type="submit">Confirm Appointment</button>
+        </div>
+
+    </form>

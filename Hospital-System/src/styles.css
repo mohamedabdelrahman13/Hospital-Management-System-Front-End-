@@ -1,4 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0;
+     padding: 0; 
+     box-sizing: border-box;
+     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+
+ /* colors */
+ :root{
+    --primary-color: #1e1efc;
+    --secondary-color: #00003f;
+    --font-color:#000000;
+ }
+
+ button.btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    border: none;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white;
+  }
+  
+  button.btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    color: white;
+
+  }
+  
+  button.btn:active {
+    transform: scale(0.98);
+  }
+  
+ 
+.line{
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 15px auto 50px auto;
+}
+
+/* .mainBtn{
+    --stop:20%;
+    border-radius: 10px;
+    padding: 10px;
+     background: #303f52;
+     background: radial-gradient(circle, rgb(59, 77, 99) var(--stop), var(--secondary-color) 100%); 
+    margin: 0 auto;
+    transition: all .4s ease;
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    color: white;
+} */
+
+.btn:disabled {
+    background-color: #ccc;  
+    cursor: not-allowed;    
+    opacity: 0.7;            
+  }

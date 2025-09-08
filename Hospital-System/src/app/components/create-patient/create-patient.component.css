@@ -1,0 +1,76 @@
+
+
+form {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 1px 5px 60px rgb(189, 186, 186);
+    color: var(--font-color);
+  }
+  
+  legend {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 0.3rem;
+    display: inline-block;
+  }
+  
+  input.form-control,
+  timepicker {
+    border-radius: 8px;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  input.form-control:focus ,.form-select:focus{
+    /* border-color: var(--primary-color); */
+    box-shadow: 0 0 10px 1px var(--primary-color) !important; 
+    /* box-shadow: none; */
+  }
+
+  .form-select:focus {
+    box-shadow: none;
+  }
+  small {
+    font-size: 0.85rem;
+  }
+  
+  .submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  
+
+
+
+
+/* section{
+    width: 50%;
+    margin: 0 auto;
+}
+
+form .form-control:focus , form .form-select:focus{
+    box-shadow: none;
+    border: 2px solid var(--primary-color);
+}
+form .form-control  , form .form-select{
+    border: 2px solid var(--secondary-color);
+}
+
+form{
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0px 0px 20px 10px rgb(202, 202, 202);
+} */

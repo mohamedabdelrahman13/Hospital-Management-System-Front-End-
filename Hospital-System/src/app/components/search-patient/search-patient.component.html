@@ -1,0 +1,47 @@
+<!-- <h1>{{searchText}}</h1>(input)="filterPatients()"  -->
+<section>
+      <form class="d-flex text-center" role="search">
+        <input class="form-control me-2 w-100 w-md-50 "
+        name="search"
+        [(ngModel)]="searchText" 
+        (ngModelChange)="onSearchChange($event)"
+        type="search" 
+        placeholder="search by name..." 
+        aria-label="Search"/>
+      </form>
+
+      <div class="search-results">
+        <div class="container">
+              <table *ngIf="this.filteredPatients" class="table table-striped text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Birth date</th>
+                      <th scope="col">Age</th>
+                      <th scope="col">Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody>   
+                      @for(p of filteredPatients ; track p.id){
+                          <tr>
+                              <td>{{p.name}}</td>
+                              <td>{{p.gender}}</td>
+                              <td>{{p.birthDate}}</td>
+                              <td>{{p.age}}</td>
+                              <td>{{p.phone}}</td>
+                              <td><a class="btn btn-info" (click)="goToDetails(p.id)"> Edit </a></td>
+                              <td><a class="btn btn-info"> Details </a></td>
+                              <td><a class="btn btn-info" (click)="goToDoctor(p.id)"> Appointment </a></td>
+                          </tr>
+                      }
+                      @empty{
+                        <div class="emptyMessage c-danger text-center">
+                           <h4>no patient with specified name </h4>
+                        </div>
+                      }
+                    </tbody>
+                  </table>
+          </div>
+      </div>
+</section>

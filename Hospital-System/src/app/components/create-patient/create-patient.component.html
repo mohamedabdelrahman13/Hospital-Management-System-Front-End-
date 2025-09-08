@@ -1,0 +1,42 @@
+<section>
+    <form [formGroup]="addPatientForm" (ngSubmit)="OnSubmit()">
+        <legend class="text-center text-bold my-3">Add new patient</legend>
+        <div class="row mb-3">
+            <div class="col-12 col-md-6">
+                <input type="text" class="form-control" formControlName="name" placeholder="Name">
+                <div *ngIf="addPatientForm.get('name')?.touched && addPatientForm.get('name')?.invalid" class="text-danger">
+                    <small *ngIf="addPatientForm.get('name')?.errors?.['required']">Name is required</small>
+                    <small *ngIf="addPatientForm.get('name')?.errors?.['maxlength']">Name must be between 6 ~ 60 characters Long</small>
+                    <small *ngIf="addPatientForm.get('name')?.errors?.['minlength']">Name must be between 6 ~ 60 characters Long</small>
+                    <small *ngIf="addPatientForm.get('name')?.errors?.['pattern']">Name must be characters only</small>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 ">
+                <select class="form-select" formControlName="gender" aria-label="Default select example">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <div *ngIf="addPatientForm.get('birthDate')?.touched && addPatientForm.get('birthDate')?.invalid" class="text-danger">
+                    <small *ngIf="addPatientForm.get('birthDate')?.errors?.['required']">birth date is required</small>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <input type="date" class="form-control" formControlName="birthDate" id="date" placeholder="DOB">
+        </div>
+        
+        <div class="mb-3">
+            <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Phone number">
+            <div *ngIf="addPatientForm.get('phone')?.touched && addPatientForm.get('phone')?.invalid" class="text-danger">
+                <small *ngIf="addPatientForm.get('phone')?.errors?.['required']">phone is required</small>
+                <small *ngIf="addPatientForm.get('phone')?.errors?.['pattern']">phone must be characters only</small>
+                <small *ngIf="addPatientForm.get('phone')?.errors?.['pattern']">phone must be 11 characters</small>
+            </div>
+        </div>
+
+        <div class="submit-btn">
+            <button class="btn" [disabled]="this.addPatientForm.invalid" type="submit">Submit</button>
+        </div>
+
+    </form>
+</section>

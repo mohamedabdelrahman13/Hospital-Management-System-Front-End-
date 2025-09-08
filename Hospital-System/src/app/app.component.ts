@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-
+import { Component, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AlertComponent , AlertModule } from 'ngx-bootstrap/alert';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,9 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   
-  public time!:any
-  public date:Date = {} as Date
+  public isShown:boolean;
   constructor() {
+    this.isShown = false;
   }
+
+
   title = 'Hospital-System';
 }
