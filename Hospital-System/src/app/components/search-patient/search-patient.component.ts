@@ -59,11 +59,11 @@ export class SearchPatientComponent {
   }
 
   goToDoctor(id:string){
-    this.router.navigate(['/doctor' , id]);
+    this.router.navigate(['/hospital-system/doctor' , id]);
   }
 
   goToDetails(id:string){
-    this.router.navigate(['/edit-patient' , id]);
+    this.router.navigate(['/hospital-system/edit-patient' , id]);
   }
 
   //unsubscribe all observables when leaving the component ...

@@ -30,7 +30,7 @@ export class DoctorComponent implements OnInit{
 
 
   goToAppointment(doctorId:string){
-    this.router.navigateByUrl(`/appointment/${this.patientId}/${doctorId}`);
+    this.router.navigateByUrl(`/hospital-system/appointment/${this.patientId}/${doctorId}`);
   }
 
 

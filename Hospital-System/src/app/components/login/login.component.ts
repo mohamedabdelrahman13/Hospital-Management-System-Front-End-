@@ -43,10 +43,15 @@ export class LoginComponent implements OnInit{
         console.log(this.response)
         if(this.response.statusCode == 200){
           this.toastr.success('Logged in successfully!');
-          // this.router.navigateByUrl('/home')
+          
+          this.router.navigateByUrl('/hospital-system')
           this.response.Token;
           this.authService.saveToken(this.response.token);
+          console.log(this.authService.isLoggedIn());
           console.log(this.authService.isInRole('Admin'));
+        }
+        else if(this.response.statusCode == 400){
+          this.toastr.error(this.response.message);
         }
       },
       error:(err)=>{console.log(err)}

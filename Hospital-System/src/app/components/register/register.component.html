@@ -21,18 +21,19 @@
         </div>
          
         <div class="mb-3">
-            <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Phone number">
-            <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid" class="text-danger">
-                <small *ngIf="registerForm.get('phone')?.errors?.['required']">phone is required</small>
-                <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">phone must be characters only</small>
-                <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">phone must be 11 characters</small>
+            <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number ">
+            <div *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid" class="text-danger">
+                <small *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">phoneNumber is required</small>
+                <small *ngIf="registerForm.get('phoneNumber')?.errors?.['pattern']">phoneNumber must be characters only</small>
+                <small *ngIf="registerForm.get('phoneNumber')?.errors?.['pattern']">phoneNumber must be 11 characters</small>
             </div>
         </div>
         <div class="mb-3">
             <div class="col-12 col-md-6">
-                <select class="form-select" formControlName="roleID" aria-label="Default select example">
+                <select class="form-select" formControlName="role" aria-label="Default select example">
+                    <!-- <option selected>Select Role</option> -->
                     @for(role of roles ; track role.id){
-                        <option [value]="role.id">{{role.name}}</option>
+                        <option [value]="role.name">{{role.name}}</option>
                     }
                 </select>  
                 <div *ngIf="registerForm.get('roleID')?.touched && registerForm.get('roleID')?.invalid" class="text-danger">

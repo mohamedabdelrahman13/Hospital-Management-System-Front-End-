@@ -25,6 +25,7 @@ export class AppointmentComponent implements OnInit {
   doctor!: doctorViewModel;
   doctorName!: string;
   patientName!: string;
+  appCost!:number;
   speciality!: string;
   // hstep = 1;
   // mstep = 30;
@@ -53,6 +54,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentForm = this.fb.group({
       patientId: [patientId],
       doctorId: [doctorId],
+      cost: [this.appCost],
       speciality: [''],
       date: [''],
       startTime: [new Date()],
@@ -68,6 +70,7 @@ export class AppointmentComponent implements OnInit {
         this.appointmentForm.get('endTime')?.setValue(end, { emitEvent: false });
       }
     });
+
     if (patientId) {
       this.patientService.getPatientByID(patientId).subscribe(pat => {
         this.patientName = pat.name;
@@ -76,7 +79,9 @@ export class AppointmentComponent implements OnInit {
     if (doctorId) {
       this.doctorService.getDoctorById(doctorId).subscribe(doc => {
         this.doctor = doc;
+
         console.log(doc)
+        this.appCost = doc.cost
         this.doctorName = doc.name;
         this.speciality = doc.speciality;
         this.appointmentForm.patchValue({

@@ -38,7 +38,6 @@ export class AddDoctorComponent implements OnInit {
   }
 
   OnSubmit() {
-
     // console.log(this.addDoctorForm.value);
     this.doctorService.addDoctor(this.addDoctorForm.value).subscribe({
       next: (Response) => {

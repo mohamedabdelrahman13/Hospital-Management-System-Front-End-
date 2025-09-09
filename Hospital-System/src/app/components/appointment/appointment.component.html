@@ -29,6 +29,10 @@
             <input type="text" id="patientName" class="form-control" [value]="patientName" disabled>
         </div>
         <div class="mb-3">
+            <label for="cost" class="form-label">Cost in EGP</label>
+            <input type="text" id="cost" class="form-control" [value]="this.appCost" disabled>
+        </div>
+        <div class="mb-3">
             <small class="fw-lighter text-secondary text-decoration-underline mb-5">please pick a corresponding date to the days available mentioned at the top</small>
             <div class="mb-3">
                 <input type="date" class="form-control" formControlName="date" id="date" placeholder="appointment date">
@@ -65,6 +69,7 @@
         <input type="hidden" formControlName="doctorId">
         <input type="hidden" formControlName="patientId">
         <input type="hidden" formControlName="speciality">
+        <input type="hidden" formControlName="cost">
 
 
 

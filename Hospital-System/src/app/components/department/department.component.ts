@@ -34,7 +34,7 @@ export class DepartmentComponent implements OnInit{
   }
 
   goToAddDoctor(id:string){
-    this.router.navigateByUrl(`/addDoctor/${id}`);
+    this.router.navigateByUrl(`/hospital-system/addDoctor/${id}`);
   }
   searchDepartments(query:string){
     if(query){

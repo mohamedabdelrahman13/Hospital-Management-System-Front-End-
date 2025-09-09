@@ -18,10 +18,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: '', pathMatch: 'full', redirectTo: '/login' },
 
-  // {path: 'sidebar' , component:SidebarComponent , children:[
-    
-  // ]}
-  {path: 'patient', component: PatientComponent, children: [
+  {path: 'hospital-system' , component:SidebarComponent , children:[
+    {path: 'patient', component: PatientComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'create-Patient' },
       { path: 'create-Patient', component: CreatePatientComponent },
       { path: 'search-Patient', component: SearchPatientComponent }
@@ -35,6 +33,8 @@ const routes: Routes = [
   { path: 'department', component: DepartmentComponent },
   { path: 'appointment/:patientId/:doctorId', component: AppointmentComponent },
   { path: 'addDoctor', component: AddDoctorComponent },
+  
+  ]},
   
 
 
