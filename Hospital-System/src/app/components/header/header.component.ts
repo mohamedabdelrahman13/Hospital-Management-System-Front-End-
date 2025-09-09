@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/authService/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   isSidebarOpen!:boolean
+ /**
+  *
+  */
+ constructor(private authService:AuthService) {
+    
+ }
+
+
 }

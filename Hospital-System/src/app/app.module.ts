@@ -35,6 +35,8 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AddDoctorComponent } from './components/add-doctor/add-doctor.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,8 @@ import { AddDoctorComponent } from './components/add-doctor/add-doctor.component
     DepartmentComponent,
     AppointmentComponent,
     AddDoctorComponent,
+    LoginComponent,
+    RegisterComponent,
     
   ],
   imports: [
