@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { login } from '../../models/login/login';
 import {jwtDecode} from 'jwt-decode';
+import { register } from '../../models/register/register';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,14 @@ export class AuthService {
   login(login: login) {
     return this.http.post<string>(`${environment.apiUrl}/api/Account/Login`, login);
   }
-
+  
+  getRoles(){
+    return this.http.get<any>(`${environment.apiUrl}/api/Account/GetRoles`); 
+  }
+  
+  register(registerData:register){
+    return this.http.post<register>(`${environment.apiUrl}/api/Account/Register` , registerData);    
+  }
 
   
   saveToken(token: string) {

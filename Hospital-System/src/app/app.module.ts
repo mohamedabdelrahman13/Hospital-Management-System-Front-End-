@@ -26,7 +26,6 @@ import { SearchPatientComponent } from './components/search-patient/search-patie
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
@@ -46,7 +45,6 @@ import { RegisterComponent } from './components/register/register.component';
     PatientComponent,
     CreatePatientComponent,
     SearchPatientComponent,
-    PatientDetailsComponent,
     EditPatientComponent,
     DashboardComponent,
     DoctorComponent,

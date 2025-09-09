@@ -11,9 +11,11 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
 import { AddDoctorComponent } from './components/add-doctor/add-doctor.component';
 import { LoginComponent } from './components/login/login.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
   { path: '', pathMatch: 'full', redirectTo: '/login' },
 
   // {path: 'sidebar' , component:SidebarComponent , children:[
