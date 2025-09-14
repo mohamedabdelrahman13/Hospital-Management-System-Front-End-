@@ -12,13 +12,15 @@ import { AddDoctorComponent } from './components/add-doctor/add-doctor.component
 import { LoginComponent } from './components/login/login.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AppointmentScheduleComponent } from './components/appointment-schedule/appointment-schedule.component';
+import { authGuard } from './guards/auth.guard';
+import { roleGuard } from './guards/role.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
   { path: '', pathMatch: 'full', redirectTo: '/login' },
-
-  {path: 'hospital-system' , component:SidebarComponent , children:[
+  { path: 'login', component: LoginComponent},
+  
+  {path: 'hospital-system' , component:SidebarComponent , canActivate:[authGuard] , children:[
     {path: 'patient', component: PatientComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'create-Patient' },
       { path: 'create-Patient', component: CreatePatientComponent },
@@ -26,13 +28,17 @@ const routes: Routes = [
     ]
   },
 
+
+  { path: 'register', component: RegisterComponent},
   { path: 'edit-patient/:id', component: EditPatientComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'doctor', component: DoctorComponent },
+  { path: 'app-Schedule', component: AppointmentScheduleComponent},
+  { path: 'doctor', component: DoctorComponent},
   { path: 'doctor/:patientId', component: DoctorComponent },
   { path: 'department', component: DepartmentComponent },
   { path: 'appointment/:patientId/:doctorId', component: AppointmentComponent },
   { path: 'addDoctor', component: AddDoctorComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   
   ]},
   

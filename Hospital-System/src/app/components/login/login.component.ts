@@ -40,17 +40,26 @@ export class LoginComponent implements OnInit{
      this.authService.login(this.loginForm.value).subscribe({
       next:(res)=>{
         this.response = res;
-        console.log(this.response)
         if(this.response.statusCode == 200){
           this.toastr.success('Logged in successfully!');
-          
+          this.authService.saveToken(this.response.token);
+          console.log(this.authService.isInRole('Admin'))
+          if(this.authService.isInRole('Admin'))
+              this.router.navigate(['/dashboard'])
+          else if(this.authService.isInRole('Doctor'))
+              this.router.navigateByUrl('/hospital-system/app-Schedule')
+          else if(this.authService.isInRole('Staff'))
+              this.router.navigateByUrl('/hospital-system/patient')
           this.router.navigateByUrl('/hospital-system')
           this.response.Token;
-          this.authService.saveToken(this.response.token);
+          this.router.events.subscribe(e => console.log(e));
           console.log(this.authService.isLoggedIn());
           console.log(this.authService.isInRole('Admin'));
         }
         else if(this.response.statusCode == 400){
+          this.toastr.error(this.response.message);
+        }
+        else if(this.response.statusCode == 403){
           this.toastr.error(this.response.message);
         }
       },

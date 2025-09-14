@@ -1,55 +1,83 @@
 <Header>
     <div class="title">
-        <h3  class="text-center  display-5 fw-bold">Register a Doctor</h3>
+        <h3 class="text-center  display-5 fw-bold">Register a Doctor</h3>
         <span class="line"></span>
     </div>
 </Header>
 <section>
     <form [formGroup]="addDoctorForm" (ngSubmit)="OnSubmit()">
-        <div class="row mb-3">
+        <div class="row">
             <div class="col-12 col-md-6">
-                <input type="text" class="form-control" formControlName="name" placeholder="Name">
-                <div *ngIf="addDoctorForm.get('name')?.touched && addDoctorForm.get('name')?.invalid" class="text-danger">
-                    <small *ngIf="addDoctorForm.get('name')?.errors?.['required']">Name is required</small>
-                    <small *ngIf="addDoctorForm.get('name')?.errors?.['maxlength']">Name must be between 6 ~ 60 characters Long</small>
-                    <small *ngIf="addDoctorForm.get('name')?.errors?.['minlength']">Name must be between 6 ~ 60 characters Long</small>
-                    <small *ngIf="addDoctorForm.get('name')?.errors?.['pattern']">Name must be characters only</small>
-                </div>
-            </div>
-            <div class="col-12 col-md-6" style="direction: rtl;">
-                <select class="form-select" formControlName="DepartmentID" aria-label="Default select example">
+                <select class="form-select" formControlName="departmentID" aria-label="Default select example">
                     @for(dept of departments ; track dept.id){
-                        <option [value]="dept.id">{{dept.ar_Name}}</option>
+                    <option [value]="dept.id">{{dept.ar_Name}}</option>
                     }
-                </select>  
-                <div *ngIf="addDoctorForm.get('DepartmentID')?.touched && addDoctorForm.get('DepartmentID')?.invalid" class="text-danger">
-                    <small *ngIf="addDoctorForm.get('DepartmentID')?.errors?.['required']">department is required</small>
+                </select>
+                <div *ngIf="addDoctorForm.get('departmentID')?.touched && addDoctorForm.get('departmentID')?.invalid"
+                    class="text-danger">
+                    <small *ngIf="addDoctorForm.get('departmentID')?.errors?.['required']">department is
+                        required</small>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <select class="form-select" formControlName="userId" aria-label="Default select example">
+                    @for(d of doctorsWithoutProfiles ; track d.id){
+                    <option [value]="d.id">{{d.userName}}</option>
+                    }
+                </select>
+                <div *ngIf="addDoctorForm.get('userId')?.touched && addDoctorForm.get('DepartmentID')?.invalid"
+                    class="text-danger">
+                    <small *ngIf="addDoctorForm.get('userId')?.errors?.['required']">user is required</small>
                 </div>
             </div>
         </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Phone number">
-            <div *ngIf="addDoctorForm.get('phone')?.touched && addDoctorForm.get('phone')?.invalid" class="text-danger">
-                <small *ngIf="addDoctorForm.get('phone')?.errors?.['required']">phone is required</small>
-                <small *ngIf="addDoctorForm.get('phone')?.errors?.['pattern']">phone must be numbers only</small>
-                <small *ngIf="addDoctorForm.get('phone')?.errors?.['pattern']">phone must be 11 characters</small>
-            </div>
+        <div class="my-3">
+            <input type="number" class="form-control" formControlName="cost" id="cost" placeholder="cost">
         </div>
-       
-        <div class="mb-3">
-            <input type="text" class="form-control" formControlName="address" id="address" placeholder="address">
-            <div *ngIf="addDoctorForm.get('address')?.touched && addDoctorForm.get('address')?.invalid" class="text-danger">
-                <small *ngIf="addDoctorForm.get('address')?.errors?.['required']">address is required</small>
-            </div>
-        </div>
-        <div class=" mb-3">
-            <input type="text" class="form-control" formControlName="cost" id="cost" placeholder="cost">
-            <div *ngIf="addDoctorForm.get('cost')?.touched && addDoctorForm.get('cost')?.invalid" class="text-danger">
-                <small *ngIf="addDoctorForm.get('cost')?.errors?.['required']">cost is required</small>
-                <small *ngIf="addDoctorForm.get('cost')?.errors?.['pattern']">cost must be numbers only</small>
+        <!-- Consultation Hours -->
+        <div formArrayName="consultationHourDTOs">
+            <div *ngFor="let group of consultationHourDTOs.controls; let i = index" [formGroupName]="i">
+
+                <label>Day of Week</label>
+                  <select class="form-select" formControlName="dayOfWeek" aria-label="Default select example">
+                      <option selected>select a day</option>
+                    @for(day of daysOfWeek ; track day){
+                    <option [value]="day">{{day}}</option>
+                    }
+                </select>
+                <!-- <input type="text" class="form-control" formControlName="dayOfWeek" placeholder="e.g. tuesday" /> -->
+                <!-- Start Time -->
+                <label>Start Time:</label>
+                <timepicker [minuteStep]="30" formControlName="startTime" [showMeridian]="false"></timepicker>
+
+                <!-- End Time -->
+                <label>End Time:</label>
+                <timepicker formControlName="endTime" [showMeridian]="false"></timepicker>
+                <!-- <label>Start Time</label>
+                <input type="time" formControlName="startTime" />
+
+                <label>End Time</label>
+                <input type="time" formControlName="endTime" /> -->
+
+                <button class="btn" type="button" (click)="removeConsultationHour(i)"
+                    *ngIf="consultationHourDTOs.length > 1">-</button>
             </div>
         </div>
 
+        <button type="button" (click)="addConsultationHour()">+ Add Consultation Hour</button>
+
+        <!-- <div class="mb-3" formArrayName="consultationHours">
+            <div *ngFor="let hour of consultationHours.controls; let i = index">
+                <div class="consultation-Hour">
+                    <input type="text" placeholder="dayOfWeek">
+                    <input type="time" placeholder="startTime">
+                    <input type="time" placeholder="endTime">
+                    <button (click)="removeConsultationHour(i)">-</button>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <button type="button" (click)="addConsultationHour()">+ Add Consultation Hour</button> -->
         <div class="submit-btn">
             <button class="btn" [disabled]="this.addDoctorForm.invalid" type="submit">Submit</button>
         </div>

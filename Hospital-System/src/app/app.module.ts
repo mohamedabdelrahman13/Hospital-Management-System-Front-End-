@@ -20,7 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './components/header/header.component';
 import { PatientComponent } from './components/patient/patient.component';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { CreatePatientComponent } from './components/create-patient/create-patient.component';
 import { SearchPatientComponent } from './components/search-patient/search-patient.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +36,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AddDoctorComponent } from './components/add-doctor/add-doctor.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NgChartsModule } from 'ng2-charts';
+import { loaderInterceptor } from './Interceptors/loader.interceptor';
+import { LoadingComponent } from './components/loading/loading.component';
+import { AppointmentScheduleComponent } from './components/appointment-schedule/appointment-schedule.component';
+import { DatePipe } from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +60,9 @@ import { RegisterComponent } from './components/register/register.component';
     AddDoctorComponent,
     LoginComponent,
     RegisterComponent,
+    LoadingComponent,
+    AppointmentScheduleComponent,
+    
     
   ],
   imports: [
@@ -82,8 +92,9 @@ import { RegisterComponent } from './components/register/register.component';
       timeOut: 3000,
       preventDuplicates: true,
     }),
+    NgChartsModule
   ],
-  providers: [provideNativeDateAdapter() , provideHttpClient(withFetch())],
+  providers: [provideNativeDateAdapter() , provideHttpClient(withFetch() , withInterceptors([loaderInterceptor])) , DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,12 +11,20 @@ export class DoctorService {
 
   constructor(private http:HttpClient) { }
 
-  getAllDoctors(){
-    return this.http.get<doctorViewModel[]>(`${environment.apiUrl}/api/Doctor/GetAllDoctors`);
+  getAllDoctorsWithoutProfile(){
+    return this.http.get<doctorViewModel[]>(`${environment.apiUrl}/api/Doctor/GetAllDoctorsWithoutProfile`);
   }
 
-  getDoctorById(id:string | null){
-    return this.http.get<doctorViewModel>(`${environment.apiUrl}/api/Doctor/GetDoctorById/${id}`);
+  getAllDoctorsWithProfile(){
+    return this.http.get<doctorViewModel[]>(`${environment.apiUrl}/api/Doctor/GetAllDoctorsWithProfile`);
+  }
+
+  // getDoctorById(id:string | null){
+  //   return this.http.get<doctorViewModel>(`${environment.apiUrl}/api/Doctor/GetDoctorById/${id}`);
+  // }
+
+  getDoctorByUserId(id:string | null){
+    return this.http.get<doctorViewModel>(`${environment.apiUrl}/api/Doctor/GetDoctorByUserID/${id}`);
   }
 
   addDoctor(doctor:addDoctor){

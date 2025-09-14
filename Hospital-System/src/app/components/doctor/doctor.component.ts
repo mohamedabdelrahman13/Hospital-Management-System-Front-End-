@@ -22,8 +22,8 @@ export class DoctorComponent implements OnInit{
     
   ngOnInit(): void {
     this.patientId = this.activeatedRoute.snapshot.paramMap.get('patientId')
-    this.doctorService.getAllDoctors().subscribe({
-      next:(docs) => {this.doctors = docs; console.log(this.doctors) , console.log(this.doctors[1].consultationHours)},
+    this.doctorService.getAllDoctorsWithProfile().subscribe({
+      next:(docs) => {this.doctors = docs; console.log(this.doctors)},
       error:(err) => {this.toastr.error('error retrieving data from server')}
     })
   }

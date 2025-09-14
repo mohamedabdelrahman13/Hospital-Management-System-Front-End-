@@ -9,7 +9,7 @@
         <span>Note : Available Appointments :</span> 
         <h6 class="fw-lighter text-success text-decoration-underline"> <br> 
         <small *ngIf="doctor">
-            @for( ch of doctor.consultationHours ; track ch.id; let last = $last){
+            @for( ch of doctor.doctorProfile.consultationHours ; track ch.id; let last = $last){
             {{ ch.dayOfWeek }} ({{ ch.startTime }} to {{ ch.endTime }})<span *ngIf="!last">, </span> <br>
             }
         </small>
@@ -49,39 +49,13 @@
              [showMeridian]="false"></timepicker>
 
         </div>
-        <!-- 
-         <div class="mb-3">
-            <label for="startTime"></label>
-            <timepicker id="startTime" [(ngModel)]="mytime" formControlName="startTime" [hourStep]="hstep" [minuteStep]="mstep" [showSeconds]="true"
-                [secondsStep]="sstep"></timepicker>
 
-            <pre class="alert alert-info">Time is: {{mytime}}</pre>
-        </div> -->
-        <!-- <mat-form-field appearance="fill">
-                <mat-label>Choose Appointment Date</mat-label>
-                <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [formControl]="date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-               -->
 
         <!-- for submitting the form  -->
         <input type="hidden" formControlName="doctorId">
         <input type="hidden" formControlName="patientId">
         <input type="hidden" formControlName="speciality">
         <input type="hidden" formControlName="cost">
-
-
-
-        <!-- <div class="mb-3">
-            <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Phone number">
-            <div *ngIf="appointmentForm.get('phone')?.touched && appointmentForm.get('phone')?.invalid" class="text-danger">
-                <small *ngIf="appointmentForm.get('phone')?.errors?.['required']">phone is required</small>
-                <small *ngIf="appointmentForm.get('phone')?.errors?.['pattern']">phone must be characters only</small>
-                <small *ngIf="appointmentForm.get('phone')?.errors?.['pattern']">phone must be 11 characters</small>
-            </div>
-        </div> -->
-
         <div class="submit-btn">
             <button class="btn btn-primary" type="submit">Confirm Appointment</button>
         </div>

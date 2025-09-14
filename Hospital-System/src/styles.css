@@ -13,7 +13,11 @@ body {
     --primary-color: #1e1efc;
     --secondary-color: #00003f;
     --font-color:#000000;
+    --shadow-effect:box-shadow: 0 4px 8px 5px #D6D5D5;
+    transition: all 0.3s ease; 
  }
+
+
 
  button.btn {
     padding: 0.7rem 1.5rem;

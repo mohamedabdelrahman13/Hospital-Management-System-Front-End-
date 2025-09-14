@@ -1,0 +1,17 @@
+<div class="appointments-container">
+    <h2>Doctor's Appointments</h2>
+  
+    @for(app of appointments ; track app.id){
+    <div class="appointment-card" >
+      <div class="appointment-header">
+        <span class="appointment-date">{{app.date}}</span>
+        <span class="appointment-time">{{app.startTime}}</span>
+      </div>
+      <div class="appointment-body">
+        <p><strong>Doctor:</strong> {{app.doctorName}}</p>
+        <p><strong>Patient:</strong> {{app.patientName}}</p>
+      </div>
+    </div>
+}
+  </div>
+  

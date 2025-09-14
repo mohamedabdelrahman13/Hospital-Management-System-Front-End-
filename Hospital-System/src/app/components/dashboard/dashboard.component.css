@@ -1,0 +1,130 @@
+section{
+  /* height: 100vh; */
+  margin-top: -10px;
+}
+
+
+/* stats */
+.stats-container .stats-card{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px 5px #D6D5D5;
+  transition: all 0.3s ease; 
+
+
+  &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px 7px rgb(178, 177, 177);
+    }
+
+
+}
+
+.stats-container .stats-card .icon{
+  width: 48px;
+  height: 48px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+}
+
+/* background: linear-gradient(135deg, #270da8, var(--primary-color)); */
+.icon-patients{
+background: linear-gradient(135deg, #7b61ff, #5a4bcf);
+}
+.icon-staff{
+background: linear-gradient(135deg, #3ab7ff, #0077ff);
+}
+.icon-costs{
+background: linear-gradient(135deg, #ff9966, #ff5e62);
+}
+.icon-revenue{
+background: linear-gradient(135deg, #ff6ec7, #d63384);
+}
+
+
+
+/* barChart  */
+
+.chart-card {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 1rem;
+  margin-top: 1.5rem;
+    display: flex;                /* make container flex */
+  flex-direction: column;       /* stack title + chart */
+  justify-content: center;      /* center vertically */
+  align-items: center;          /* center horizontally */
+  height:400px;   
+  /* box-shadow: var(--shadow-effect); */
+  box-shadow: 0 4px 8px 5px #D6D5D5;
+  transition: all 0.3s ease; 
+
+  &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px 7px rgb(178, 177, 177);
+    }
+
+
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+  }
+}
+
+
+
+.division-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 8px 5px #D6D5D5;
+  transition: all 0.3s ease; 
+
+  &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px 7px rgb(178, 177, 177);
+    }
+
+}
+
+.division-card .division-card-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    border-radius: 0.8rem;
+    background: #f9fafb;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #f1f5f9;
+    }
+  }
+.division-card .division-card-item span{  
+    color: black;
+    font-weight: 900;
+  }
+
+.division-card .division-card-item h5{  
+    color: rgb(156, 154, 154);
+    font-weight: 900;
+  }
+
+.division-card .division-card-item mat-icon{
+  font-size: 24px;
+  margin-right: 0.8rem;
+  color: rgb(156, 154, 154);
+  }
+
+
+  

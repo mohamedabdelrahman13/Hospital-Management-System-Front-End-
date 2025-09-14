@@ -54,7 +54,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentForm = this.fb.group({
       patientId: [patientId],
       doctorId: [doctorId],
-      cost: [this.appCost],
+      cost: [''],
       speciality: [''],
       date: [''],
       startTime: [new Date()],
@@ -77,15 +77,17 @@ export class AppointmentComponent implements OnInit {
       });
     }
     if (doctorId) {
-      this.doctorService.getDoctorById(doctorId).subscribe(doc => {
+      this.doctorService.getDoctorByUserId(doctorId).subscribe(doc => {
         this.doctor = doc;
-
-        console.log(doc)
-        this.appCost = doc.cost
-        this.doctorName = doc.name;
-        this.speciality = doc.speciality;
         this.appointmentForm.patchValue({
-          speciality: doc.speciality
+          cost:this.doctor.doctorProfile.cost
+        })
+        console.log(doc)
+        this.appCost = doc.doctorProfile.cost
+        this.doctorName = doc.userName;
+        this.speciality = doc.doctorProfile.speciality;
+        this.appointmentForm.patchValue({
+          speciality: doc.doctorProfile.speciality
         });
       });
     }

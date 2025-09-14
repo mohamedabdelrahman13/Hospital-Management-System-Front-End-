@@ -1,6 +1,8 @@
-import { Component, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertComponent , AlertModule } from 'ngx-bootstrap/alert';
+import { Observable } from 'rxjs';
+import { LoadingService } from './services/loadingService/loading.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,9 +11,18 @@ import { AlertComponent , AlertModule } from 'ngx-bootstrap/alert';
 })
 export class AppComponent {
   
-  public isShown:boolean;
-  constructor() {
-    this.isShown = false;
+  loading = false;
+
+  constructor(
+    private loadingService: LoadingService,
+    private cd: ChangeDetectorRef
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.loadingService.loading$.subscribe(state => {
+      this.loading = state;
+      this.cd.detectChanges(); 
+    });
   }
 
 
