@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../../services/PatientService/patient.service';
 import { patient } from '../../models/patient-model/patient';
 import { doctor } from '../../models/doctor/doctor';
@@ -9,6 +9,7 @@ import { doctorViewModel } from '../../viewModels/doctor/doctorViewModel';
 import { AppointmentService } from '../../services/appointmentService/appointment.service';
 import { ToastrService } from 'ngx-toastr';
 import { response } from '../../models/response/response';
+import { DatePipe } from '@angular/common';
 interface IOptions {
   hstep: number[];
   mstep: number[];
@@ -44,7 +45,9 @@ export class AppointmentComponent implements OnInit {
     private doctorService: DoctorService
     , private fb: FormBuilder
     , private appoinService: AppointmentService
-    , private toastr: ToastrService) {
+    , private toastr: ToastrService
+    ,private router:Router
+    ,private datePipe:DatePipe) {
 
   }
   ngOnInit(): void {
@@ -87,6 +90,7 @@ export class AppointmentComponent implements OnInit {
         this.doctorName = doc.userName;
         this.speciality = doc.doctorProfile.speciality;
         this.appointmentForm.patchValue({
+
           speciality: doc.doctorProfile.speciality
         });
       });
@@ -98,28 +102,61 @@ export class AppointmentComponent implements OnInit {
   }
 
 
-  formatTime(date: Date): string {
-    return date.toLocaleTimeString('en-GB', { hour12: false });
+  formatTime(date: Date): string | null{
+    // return date.toLocaleTimeString('en-GB', { hour12: false });
+    return this.datePipe.transform(date , 'HH:mm:00');
   }
 
-
-  OnSubmit() {
+  Checkout(){
     const appValue = this.appointmentForm.getRawValue(); //includes the disabled values..
     const payload = {
       ...appValue,
       startTime: this.formatTime(appValue.startTime),
       endTime: this.formatTime(appValue.endTime),
     }
-    console.log(payload);
-    this.appoinService.bookAppointment(payload).subscribe({
-      next: (res) => {
-        this.response = res;
-        if (this.response.statusCode == 200) { this.toastr.success(this.response.message, 'Done') }
-        else if (this.response.statusCode == 409) { this.toastr.warning(this.response.message) }
-        else { this.toastr.error(this.response.message) }
-        console.log(res);
-      },
-      error: (err) => {this.toastr.error('Server Error')}
+
+    this.appoinService.checkAvailability(payload).subscribe(res => {
+      this.response = res;
+      if (this.response.statusCode == 200) { 
+        this.router.navigate(['/hospital-system/checkout'], {
+          queryParams: {
+            patientId: payload.patientId,
+            doctorId: payload.doctorId,
+            cost: payload.cost,
+            speciality: payload.speciality,
+            date: payload.date,
+            startTime: payload.startTime,
+            endTime: payload.endTime
+          }
+        });
+        // this.toastr.success(this.response.message, 'Done') 
+      }
+      else if (this.response.statusCode == 409) { 
+        this.toastr.warning(this.response.message) 
+      }
+      else { this.toastr.error(this.response.message) }
+      console.log(res);
     })
+ 
+  }
+
+  OnSubmit() {
+    // const appValue = this.appointmentForm.getRawValue(); //includes the disabled values..
+    // const payload = {
+    //   ...appValue,
+    //   startTime: this.formatTime(appValue.startTime),
+    //   endTime: this.formatTime(appValue.endTime),
+    // }
+    // console.log(payload);
+    // this.appoinService.bookAppointment(payload).subscribe({
+    //   next: (res) => {
+    //     this.response = res;
+    //     if (this.response.statusCode == 200) { this.toastr.success(this.response.message, 'Done') }
+    //     else if (this.response.statusCode == 409) { this.toastr.warning(this.response.message) }
+    //     else { this.toastr.error(this.response.message) }
+    //     console.log(res);
+    //   },
+    //   error: (err) => {this.toastr.error('Server Error')}
+    // })
   }
 }

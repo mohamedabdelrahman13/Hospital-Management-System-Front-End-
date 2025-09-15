@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services/appointmentService/appointment.service';
 import { appSchedule } from '../../models/appointmentScedule/appointmentSchedule';
+import { PaymentService } from '../../services/paymentService/payment.service';
 
 @Component({
   selector: 'app-appointment-schedule',
@@ -10,7 +11,8 @@ import { appSchedule } from '../../models/appointmentScedule/appointmentSchedule
 })
 export class AppointmentScheduleComponent implements OnInit{
   public appointments!:appSchedule[]
-  constructor(private appointmentService:AppointmentService){
+  constructor(private appointmentService:AppointmentService
+   ){
   }
   
   id = '67de36b9-ab94-4c31-b888-96f58755df5c'

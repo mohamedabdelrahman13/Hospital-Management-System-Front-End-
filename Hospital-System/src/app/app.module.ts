@@ -41,6 +41,10 @@ import { loaderInterceptor } from './Interceptors/loader.interceptor';
 import { LoadingComponent } from './components/loading/loading.component';
 import { AppointmentScheduleComponent } from './components/appointment-schedule/appointment-schedule.component';
 import { DatePipe } from '@angular/common';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { SuccessComponent } from './components/success/success.component';
+import { HistoryComponent } from './components/history/history.component';
+import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 
 
 @NgModule({
@@ -62,6 +66,10 @@ import { DatePipe } from '@angular/common';
     RegisterComponent,
     LoadingComponent,
     AppointmentScheduleComponent,
+    CheckoutComponent,
+    SuccessComponent,
+    HistoryComponent,
+    CardPaymentComponent,
     
     
   ],

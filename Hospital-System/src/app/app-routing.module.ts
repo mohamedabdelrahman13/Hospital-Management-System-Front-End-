@@ -15,6 +15,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { AppointmentScheduleComponent } from './components/appointment-schedule/appointment-schedule.component';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -38,6 +40,8 @@ const routes: Routes = [
   { path: 'department', component: DepartmentComponent },
   { path: 'appointment/:patientId/:doctorId', component: AppointmentComponent },
   { path: 'addDoctor', component: AddDoctorComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'card-payment', component: CardPaymentComponent},
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   
   ]},

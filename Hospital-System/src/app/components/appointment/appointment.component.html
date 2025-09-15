@@ -56,8 +56,13 @@
         <input type="hidden" formControlName="patientId">
         <input type="hidden" formControlName="speciality">
         <input type="hidden" formControlName="cost">
+        <!-- <div>
+            <h3>Pay for Appointment</h3>
+            <div #cardElement id="card-element"></div>
+            <button (click)="pay()">Pay</button>
+          </div> -->
         <div class="submit-btn">
-            <button class="btn btn-primary" type="submit">Confirm Appointment</button>
+            <button class="btn btn-primary" (click)="Checkout()" type="submit">Checkout</button>
         </div>
 
     </form>
