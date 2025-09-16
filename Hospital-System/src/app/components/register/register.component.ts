@@ -22,8 +22,6 @@ export class RegisterComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.authService.getRoles().subscribe(roles => this.roles = roles);
-
     this.registerForm = this.fb.group({
       username : ['' , [Validators.required , Validators.maxLength(60) , Validators.minLength(5)]],
       email : ['' , Validators.required],
@@ -31,21 +29,21 @@ export class RegisterComponent implements OnInit{
       phoneNumber : ['' , [Validators.required ,  Validators.pattern(/^[0-9]{11}$/)]],
       role : ['', Validators.required]
     })
+    this.authService.getRoles().subscribe(roles => this.roles = roles);
+
   }
 
 
   OnSubmit(){
-
-    console.log(this.registerForm.value)
     this.authService.register(this.registerForm.value).subscribe({
       next:(resp) =>{
         this.response = resp
-        console.log(this.response)
         if(this.response.statusCode = 200 ){
-             this.toastr.success(this.response.message);// this.router.navigateByUrl('')
+             this.toastr.success(this.response.message);
+             console.log(this.response);
         }
         else if(this.response.statusCode = 400){
-          this.toastr.error(this.response.message);
+          this.toastr.error(this.response);
         }
       },
 

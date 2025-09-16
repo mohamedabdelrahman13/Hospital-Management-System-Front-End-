@@ -30,8 +30,8 @@
                               <td>{{p.birthDate}}</td>
                               <td>{{p.age}}</td>
                               <td>{{p.phone}}</td>
-                              <td><a class="btn btn-info" (click)="goToDetails(p.id)"> Edit </a></td>
-                              <td><a class="btn btn-info"> Details </a></td>
+                              <td><a class="btn btn-info" (click)="goToEditPage(p.id)"> Edit </a></td>
+                              <td><a class="btn btn-info" (click)="goToPatientDetails(p.id)"> Details </a></td>
                               <td><a class="btn btn-info" (click)="goToDoctor(p.id)"> Appointment </a></td>
                           </tr>
                       }

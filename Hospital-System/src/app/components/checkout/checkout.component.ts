@@ -59,12 +59,12 @@ export class CheckoutComponent implements OnInit{
 
    
 
-      // ✅ fetch patient name
+      // fetch patient name
       this.patientService.getPatientByID(this.patientId).subscribe(patient => {
         this.patientName = patient.name;
       });
 
-      // ✅ fetch doctor name
+      // fetch doctor name
       this.doctorService.getDoctorByUserId(this.doctorId).subscribe(doc => {
         this.doctorName = doc.userName;
       });
@@ -101,10 +101,7 @@ export class CheckoutComponent implements OnInit{
               status:'cash'
           }
 
-          // () => {
-          //   this.toastr.success('Appointment is booked successfully!')
-          // }
-          // directly mark as paid
+          // directly mark as paid if the payment is cash
           this.invoiceService.markAsPaid(invoice.id , paymentRequest).subscribe({
             next:() => this.appointmentService.bookAppointment(this.AppointmentData).subscribe({
               next:(res) => {

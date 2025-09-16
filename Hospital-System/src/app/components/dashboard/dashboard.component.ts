@@ -145,26 +145,26 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getPatientsNumber().subscribe(ac => this.totalPatients = ac)
     this.dashboardService.getTotalStaff().subscribe(ac => this.totalStaff = ac)
 
-  const subs1:Subscription =  this.dashboardService.getRevenueStats(this.selectedView).subscribe(resp => {
+       this.dashboardService.getRevenueStats(this.selectedView).subscribe(resp => {
       this.revenueLabels = resp.map(x => x.time);
       this.revenueData = resp.map(x => x.revenue);
       this.assignRevenueChart(this.revenueLabels , this.revenueData); 
       this.totalRevenue = this.revenueData.reduce((acc , current) => acc + current , 0);
     })
     
-    const subs2:Subscription = this.dashboardService.getPatientsStats(this.selectedView).subscribe(resp => {
+      this.dashboardService.getPatientsStats(this.selectedView).subscribe(resp => {
       this.patientsTrendLabels = resp.map(x=>x.time); 
       this.patientsTrendData = resp.map(x=>x.numberOfPatients);
       this.assignPatientsTrendsChart(this.patientsTrendLabels , this.patientsTrendData);
     })
     
-    const subs3:Subscription = this.dashboardService.getAppointmentsStats(this.selectedView).subscribe(resp => {
+      this.dashboardService.getAppointmentsStats(this.selectedView).subscribe(resp => {
       this.appStatsLabels = resp.map(x=>x.time); 
       this.appStatsData = resp.map(x=>x.numberOfAppointments);
       this.assignAppointmentChart(this.patientsTrendLabels , this.patientsTrendData);
     })
     
-    const subs4:Subscription = this.dashboardService.getDepartmentsStats().subscribe(resp => {
+     this.dashboardService.getDepartmentsStats().subscribe(resp => {
       this.deptStatsLabels = resp.map(x=>x.department); 
       this.deptStatsData = resp.map(x=>x.numberOfPatients);
       this.assignDeptsChart(this.deptStatsLabels , this.deptStatsData);
@@ -174,7 +174,7 @@ export class DashboardComponent implements OnInit {
   }
   
   
-  loadRevenueStats(view: string) {
+  updateStats(view: string) {
     this.dashboardService.getRevenueStats(view).subscribe((res) => {
       // assign the time to labels and revenue to data 
       this.revenueLabels = res.map(x => x.time);
@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getAppointmentsStats(view).subscribe(resp => {
       this.appStatsLabels = resp.map(x=>x.time); 
       this.appStatsData = resp.map(x=>x.numberOfAppointments);
-      this.assignAppointmentChart(this.patientsTrendLabels , this.patientsTrendData);
+      this.assignAppointmentChart(this.appStatsLabels , this.appStatsData);
     })
   }
   
@@ -225,9 +225,14 @@ export class DashboardComponent implements OnInit {
           {
             data: data, 
             backgroundColor: [
-              '#118ab2', // Blue
-              '#ef476f', // Red
-              '#ffd166', // Yellow
+              '#118ab2',
+              '#663399',
+              '#ef476f',
+              '#ffd166',
+              '#008000',
+              '#66cccc',
+              '#ff6600',
+              '#9999cc'
             ],
             hoverOffset: 10    
           }

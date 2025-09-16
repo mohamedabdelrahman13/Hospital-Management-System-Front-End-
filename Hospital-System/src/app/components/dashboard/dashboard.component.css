@@ -3,6 +3,25 @@ section{
   margin-top: -10px;
 }
 
+/* Select input style  */
+#viewSelect {
+  width: 200px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #374151;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+}
+
+
 
 /* stats */
 .stats-container .stats-card{

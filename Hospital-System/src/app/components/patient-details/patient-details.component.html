@@ -1,0 +1,43 @@
+<div class="patient-container">
+    <!-- Patient Info -->
+    <div class="patient-header">
+      <h2>{{ patient.name }}</h2>
+      <p><strong>DOB:</strong> {{ patient.birthDate | date:'mediumDate' }}</p>
+      <p><strong>Gender:</strong> {{ patient.gender }}</p>
+      <p><strong>Phone:</strong> {{ patient.phone }}</p>
+      <p><strong>Created On:</strong> {{ patient.createdOn | date:'mediumDate' }}</p>
+    </div>
+  
+    <!-- Invoices Section -->
+    <div class="invoices-section">
+      <h3>Invoices</h3>
+  
+      <div class="invoice-card" *ngFor="let invoice of patient.invoices">
+        <div class="invoice-header">
+          <h4>Invoice #{{ invoice.id }}</h4>
+          <span class="status" [ngClass]="invoice.status.toLowerCase()">
+            {{ invoice.status }}
+          </span>
+        </div>
+  
+        <div class="invoice-details">
+          <p><strong>Doctor:</strong> {{ invoice.doctorName || 'N/A' }}</p>
+          <p><strong>Speciality:</strong> {{ invoice.speciality }}</p>
+          <p><strong>Amount:</strong> {{ invoice.amount | number:'1.2-2' }} EGP</p>
+          <p><strong>Created At:</strong> {{ invoice.createdAt | date:'short' }}</p>
+        </div>
+  
+        <!-- Payments -->
+        <div class="payments">
+          <h5>Payments</h5>
+          <div class="payment" *ngFor="let p of invoice.payments">
+            <p><strong>ID:</strong> {{ p.id }}</p>
+            <p><strong>Amount:</strong> {{ p.amount | number:'1.2-2' }} EGP</p>
+            <p><strong>Status:</strong> {{ p.status }}</p>
+            <p><strong>Date:</strong> {{ p.createdAt | date:'short' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

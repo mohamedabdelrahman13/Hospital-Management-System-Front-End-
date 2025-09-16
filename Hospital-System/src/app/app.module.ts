@@ -45,6 +45,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SuccessComponent } from './components/success/success.component';
 import { HistoryComponent } from './components/history/history.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { CardPaymentComponent } from './components/card-payment/card-payment.com
     SuccessComponent,
     HistoryComponent,
     CardPaymentComponent,
+    PatientDetailsComponent,
     
     
   ],

@@ -15,6 +15,7 @@ import { AppointmentService } from '../../services/appointmentService/appointmen
   styleUrl: './card-payment.component.css'
 })
 export class CardPaymentComponent implements OnInit {
+
   private invoiceId!: string;
   public patientId!: string;
   public amount!: number;
@@ -42,15 +43,6 @@ export class CardPaymentComponent implements OnInit {
 
   }
 
-  // patientId : invoice.patientId,
-  //               invoiceId : invoice.id,
-  //               amount : invoice.amount,
-  //               doctorId : this.doctorId,
-  //               date : this.date,
-  //               startTime:this.startTime,
-  //               endTime : this.endTime,
-  //               speciality: this.speciality,
-
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(params => {
@@ -64,6 +56,7 @@ export class CardPaymentComponent implements OnInit {
       this.amount = +params['amount'];
     });
 
+    //initialize appointement data to save
     this.appointmentData = {
       patientId : this.patientId,
       doctorId : this.doctorId,
@@ -82,22 +75,19 @@ export class CardPaymentComponent implements OnInit {
     this.stripe = await loadStripe(`${environment.stripePublishableKey}`); // Stripe publishable key
 
 
+
     if (this.stripe) {
       this.paymentService.createPaymentIntent({
         invoiceId: this.invoiceId,
         patientId: this.patientId,
         amount: this.amount
       }).subscribe(async res => {
+        //initialize the elements in the template 
         this.elements = this.stripe!.elements({ clientSecret: res.clientSecret });
         this.paymentElement = this.elements.create('payment');
         this.paymentElement.mount('#payment-element');
       });
     }
-    // if (this.stripe) {
-    //   this.elements = this.stripe.elements();
-    //   this.paymentElement = this.elements.create('payment');
-    //   this.paymentElement.mount('#card-element'); // attach to HTML <div>
-    // }
   }
 
   async pay() {

@@ -22,23 +22,13 @@ interface IOptions {
   styleUrl: './appointment.component.css'
 })
 export class AppointmentComponent implements OnInit {
-  response!: any
-  doctor!: doctorViewModel;
-  doctorName!: string;
-  patientName!: string;
-  appCost!:number;
-  speciality!: string;
-  // hstep = 1;
-  // mstep = 30;
-  // sstep = 0;
-
-  // mytime: Date = new Date();
-
-  // options: IOptions = {
-  //   hstep: [1, 2, 3],
-  //   mstep: [1, 5, 10, 15, 25, 30],
-  //   sstep: [0]
-  // };
+  private response!: any
+  public doctor!: doctorViewModel;
+  public doctorName!: string;
+  public patientName!: string;
+  public appCost!:number;
+  public speciality!: string;
+ 
   public appointmentForm!: FormGroup;
   constructor(private activatedRoute: ActivatedRoute,
     private patientService: PatientService,
@@ -103,21 +93,22 @@ export class AppointmentComponent implements OnInit {
 
 
   formatTime(date: Date): string | null{
-    // return date.toLocaleTimeString('en-GB', { hour12: false });
     return this.datePipe.transform(date , 'HH:mm:00');
   }
 
   Checkout(){
-    const appValue = this.appointmentForm.getRawValue(); //includes the disabled values..
+    const appValue = this.appointmentForm.getRawValue(); //includes the disabled values.. (endTime..)
     const payload = {
       ...appValue,
       startTime: this.formatTime(appValue.startTime),
       endTime: this.formatTime(appValue.endTime),
     }
 
+    // check whether the appointment is within the doctor consultation time or not 
     this.appoinService.checkAvailability(payload).subscribe(res => {
       this.response = res;
       if (this.response.statusCode == 200) { 
+        //redirect to checkout with queryParameters ...
         this.router.navigate(['/hospital-system/checkout'], {
           queryParams: {
             patientId: payload.patientId,
@@ -129,34 +120,12 @@ export class AppointmentComponent implements OnInit {
             endTime: payload.endTime
           }
         });
-        // this.toastr.success(this.response.message, 'Done') 
       }
       else if (this.response.statusCode == 409) { 
         this.toastr.warning(this.response.message) 
       }
       else { this.toastr.error(this.response.message) }
-      console.log(res);
     })
  
-  }
-
-  OnSubmit() {
-    // const appValue = this.appointmentForm.getRawValue(); //includes the disabled values..
-    // const payload = {
-    //   ...appValue,
-    //   startTime: this.formatTime(appValue.startTime),
-    //   endTime: this.formatTime(appValue.endTime),
-    // }
-    // console.log(payload);
-    // this.appoinService.bookAppointment(payload).subscribe({
-    //   next: (res) => {
-    //     this.response = res;
-    //     if (this.response.statusCode == 200) { this.toastr.success(this.response.message, 'Done') }
-    //     else if (this.response.statusCode == 409) { this.toastr.warning(this.response.message) }
-    //     else { this.toastr.error(this.response.message) }
-    //     console.log(res);
-    //   },
-    //   error: (err) => {this.toastr.error('Server Error')}
-    // })
   }
 }

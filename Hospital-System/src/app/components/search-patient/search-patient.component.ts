@@ -48,22 +48,19 @@ export class SearchPatientComponent {
         })
 
       this.subscriptions.push(subsctription2);
-    }
-    // const queryText = this.searchText.toLowerCase();
-    // var subscritpion2 = this.patientService.searchPatientsByName(queryText).subscribe({
-    //   next:(patients) => {this.filteredPatients = patients},
-    //   error:(err) => {console.log(err)}
-    // })
-
-  
+    } 
   }
 
   goToDoctor(id:string){
     this.router.navigate(['/hospital-system/doctor' , id]);
   }
 
-  goToDetails(id:string){
+  goToEditPage(id:string){
     this.router.navigate(['/hospital-system/edit-patient' , id]);
+  }
+
+  goToPatientDetails(id:string){
+    this.router.navigate(['/hospital-system/patient-details' , id]);
   }
 
   //unsubscribe all observables when leaving the component ...

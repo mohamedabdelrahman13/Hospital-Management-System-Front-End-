@@ -1,5 +1,5 @@
 <form [formGroup]="registerForm" (ngSubmit)="OnSubmit()">
-    <legend class="text-center text-bold my-3">Login</legend>
+    <legend class="text-center text-bold my-3">Register</legend>
     <div>
         <div class="mb-3">
             <input type="text" class="form-control" formControlName="username" placeholder="Username">
@@ -31,7 +31,7 @@
         <div class="mb-3">
             <div class="col-12 col-md-6">
                 <select class="form-select" formControlName="role" aria-label="Default select example">
-                    <!-- <option selected>Select Role</option> -->
+                    <option value="" selected disabled>Select Role</option>
                     @for(role of roles ; track role.id){
                         <option [value]="role.name">{{role.name}}</option>
                     }

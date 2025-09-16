@@ -4,6 +4,7 @@ import { patient } from '../models/patient-model/patient';
 import { PatientService } from '../services/PatientService/patient.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { patientDetailsDTO } from '../models/patient-model/patientDetailsDTO';
 
 @Component({
   selector: 'app-edit-patient',
@@ -13,9 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditPatientComponent implements OnInit {
 
-  // public patientId!:string | null;
   public editPatientForm!: FormGroup;
-  public patient: patient = {} as patient;
+  public patient: patientDetailsDTO = {} as patientDetailsDTO;
 
   constructor(private activatedRoute: ActivatedRoute
     ,private router:Router
@@ -26,6 +26,8 @@ export class EditPatientComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    //get patient id from the URL...
     const patientId = this.activatedRoute.snapshot.paramMap.get('id');
     this.editPatientForm = this.fb.group({
       id : [patientId],
@@ -38,6 +40,8 @@ export class EditPatientComponent implements OnInit {
     if (patientId) {
       this.patientService.getPatientByID(patientId).subscribe((pat) => {
         this.patient = pat
+
+        //update the value of patient
         this.editPatientForm.patchValue(this.patient);
       });
 
@@ -51,8 +55,11 @@ export class EditPatientComponent implements OnInit {
     .subscribe({
       next:(response) => {
         this.toastr.success('updated Successfully !' , 'Updated');
-        this.router.navigateByUrl('/patient/search-Patient');
-      }
+        this.router.navigateByUrl('/hospital-system/search-Patient');
+      },
+      error:(err =>{
+        this.toastr.error('server error , try again later')
+      })
     }
     )
   }

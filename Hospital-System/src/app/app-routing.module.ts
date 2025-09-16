@@ -17,6 +17,7 @@ import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   },
 
 
+  { path: 'patient-details/:patientId', component: PatientDetailsComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'edit-patient/:id', component: EditPatientComponent },
   { path: 'dashboard', component: DashboardComponent },

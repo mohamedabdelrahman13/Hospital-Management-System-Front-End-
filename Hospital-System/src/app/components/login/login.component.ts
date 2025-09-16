@@ -31,11 +31,6 @@ export class LoginComponent implements OnInit{
     })
   }
 
-
-  // getRoles(){
-  //   const userRole = this.authService.getUserRoles();
-  //   return userRole;
-  // }
   OnSubmit(){
      this.authService.login(this.loginForm.value).subscribe({
       next:(res)=>{

@@ -14,6 +14,8 @@ import { DatePipe } from '@angular/common';
   styleUrl: './add-doctor.component.css'
 })
 export class AddDoctorComponent implements OnInit {
+
+  
   public doctorsWithoutProfiles!:doctorViewModel[]
   public addDoctorForm!: FormGroup;
   public departments!: department[]
@@ -24,15 +26,14 @@ export class AddDoctorComponent implements OnInit {
     , private toastr: ToastrService
     ,private datePipe: DatePipe
   ) {
-
     this.daysOfWeek = ['saturday' , 'sunday' , 'monday' , 'tuesday' , 'wednesday' , 'thursday' , 'friday' ]
   }
   ngOnInit(): void {
     
     this.addDoctorForm = this.fb.group({
-      departmentID: ['department', Validators.required],
+      departmentID: ['', Validators.required],
       userId:['' , Validators.required],
-      cost: ['', Validators.required],
+      cost: ['', [Validators.required , Validators.min(200), Validators.max(1500)]],
       consultationHourDTOs: this.fb.array([this.createConsultationHour()])
     })
 
@@ -58,14 +59,13 @@ export class AddDoctorComponent implements OnInit {
   }
   
 
+  // retrieve the CH array 
   get consultationHourDTOs(): FormArray{
     return this.addDoctorForm.get('consultationHourDTOs') as FormArray;
   }
   
   addConsultationHour() {
     this.consultationHourDTOs.push(this.createConsultationHour());
-      
-    console.log(this.addDoctorForm.value);
   }
 
   removeConsultationHour(index: number) {
@@ -73,15 +73,8 @@ export class AddDoctorComponent implements OnInit {
   }
 
   
+  //transform the date into Hour:minutes:seconds
   formatTime(date: Date): string | null{
-    // return date.toLocaleTimeString('en-GB', { hour12: false });
-    // if (!date) return '';
-
-    // const hours = date.getHours().toString().padStart(2, '0');
-    // const minutes = date.getMinutes().toString().padStart(2, '0');
-    // const seconds = date.getSeconds().toString().padStart(2, '0');
-  
-    // return `${hours}:${minutes}:${seconds}`;
     return this.datePipe.transform(date , 'HH:mm:00');
   }
 
@@ -97,7 +90,6 @@ export class AddDoctorComponent implements OnInit {
     });
 
     
-    console.log(this.addDoctorForm.value);
     this.doctorService.addDoctor(this.addDoctorForm.value).subscribe({
       next: (Response) => {
         this.toastr.success('Saved Successfully', 'Done');

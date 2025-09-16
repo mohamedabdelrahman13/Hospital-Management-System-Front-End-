@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { patient } from '../../models/patient-model/patient';
 import { environment } from '../../environments/environment';
 import { addPatientModel } from '../../models/patient-model/addPatientModel';
+import { patientDetailsDTO } from '../../models/patient-model/patientDetailsDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class PatientService {
   }
 
   getPatientByID(id:string | null){
-    return this.http.get<patient>(`${environment.apiUrl}/api/Patient/GetPatientByID/${id}`);
+    return this.http.get<patientDetailsDTO>(`${environment.apiUrl}/api/Patient/GetPatientByID/${id}`);
   }
 
   EditPatient(patientDTO:addPatientModel){

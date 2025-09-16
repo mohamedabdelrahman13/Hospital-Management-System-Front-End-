@@ -9,9 +9,7 @@ import { AuthService } from '../../services/authService/auth.service';
 })
 export class HeaderComponent {
   isSidebarOpen!:boolean
- /**
-  *
-  */
+
  constructor(private authService:AuthService) {
     
  }

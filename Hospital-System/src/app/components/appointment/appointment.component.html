@@ -4,7 +4,7 @@
             <span class="line"></span>
         </div>
     </Header>
-    <form [formGroup]="appointmentForm" (ngSubmit)="OnSubmit()">
+    <form [formGroup]="appointmentForm">
         <!-- <legend class="text-center text-bold my-3">Book an appointment</legend> -->
         <span>Note : Available Appointments :</span> 
         <h6 class="fw-lighter text-success text-decoration-underline"> <br> 
@@ -56,11 +56,6 @@
         <input type="hidden" formControlName="patientId">
         <input type="hidden" formControlName="speciality">
         <input type="hidden" formControlName="cost">
-        <!-- <div>
-            <h3>Pay for Appointment</h3>
-            <div #cardElement id="card-element"></div>
-            <button (click)="pay()">Pay</button>
-          </div> -->
         <div class="submit-btn">
             <button class="btn btn-primary" (click)="Checkout()" type="submit">Checkout</button>
         </div>
