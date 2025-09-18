@@ -17,19 +17,19 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card h-auto text-center">
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title">{{ doc.userName }}</h5>
+              <h5 class="card-title">Dr. {{ doc.userName }}</h5>
               <h6 class="card-subtitle mb-2 text-body-tertiary  ">{{ doc.doctorProfile.speciality }}</h6>
               <h6 class="card-subtitle mb-2  ">{{ doc.doctorProfile.cost | currency:'EGP' : 'symbol'}}</h6>
 
               <h6 class="card-text">
                 <h6 class="text-success">available on:</h6>
-                @for (ch of doc.doctorProfile.consultationHours; track ch.id; let last = $last) {
+                @for (ch of doc.doctorProfile.consultationHours; track $index; let last = $last) {
                   {{ ch.dayOfWeek }} ({{ ch.startTime }} - {{ ch.endTime }})<span *ngIf="!last">, </span>
                 }
               </h6>
   
               <div class="mt-auto">
-                <button class="btn btn-sm mainBtn me-2" (click)="goToAppointment(doc.id)">Appointment →</button>
+                <button class="btn btn-sm me-2" (click)="goToAppointment(doc.id)">Appointment →</button>
               </div>
             </div>
           </div>

@@ -24,7 +24,7 @@
           <p><strong>Doctor:</strong> {{ invoice.doctorName || 'N/A' }}</p>
           <p><strong>Speciality:</strong> {{ invoice.speciality }}</p>
           <p><strong>Amount:</strong> {{ invoice.amount | number:'1.2-2' }} EGP</p>
-          <p><strong>Created At:</strong> {{ invoice.createdAt | date:'short' }}</p>
+          <p><strong>Created At:</strong> {{ invoice.createdAt | date:'mediumDate' }}</p>
         </div>
   
         <!-- Payments -->
@@ -34,7 +34,7 @@
             <p><strong>ID:</strong> {{ p.id }}</p>
             <p><strong>Amount:</strong> {{ p.amount | number:'1.2-2' }} EGP</p>
             <p><strong>Status:</strong> {{ p.status }}</p>
-            <p><strong>Date:</strong> {{ p.createdAt | date:'short' }}</p>
+            <p><strong>Date:</strong> {{ p.createdAt | date:'long' }}</p>
           </div>
         </div>
       </div>

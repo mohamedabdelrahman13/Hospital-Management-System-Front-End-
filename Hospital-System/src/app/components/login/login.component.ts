@@ -35,10 +35,9 @@ export class LoginComponent implements OnInit{
      this.authService.login(this.loginForm.value).subscribe({
       next:(res)=>{
         this.response = res;
-        if(this.response.statusCode == 200){
+        if(this.response.statusCode === 200){
           this.toastr.success('Logged in successfully!');
           this.authService.saveToken(this.response.token);
-          console.log(this.authService.isInRole('Admin'))
           if(this.authService.isInRole('Admin'))
               this.router.navigate(['/dashboard'])
           else if(this.authService.isInRole('Doctor'))
@@ -47,14 +46,11 @@ export class LoginComponent implements OnInit{
               this.router.navigateByUrl('/hospital-system/patient')
           this.router.navigateByUrl('/hospital-system')
           this.response.Token;
-          this.router.events.subscribe(e => console.log(e));
-          console.log(this.authService.isLoggedIn());
-          console.log(this.authService.isInRole('Admin'));
         }
-        else if(this.response.statusCode == 400){
+        else if(this.response.statusCode === 400){
           this.toastr.error(this.response.message);
         }
-        else if(this.response.statusCode == 403){
+        else if(this.response.statusCode === 403){
           this.toastr.error(this.response.message);
         }
       },

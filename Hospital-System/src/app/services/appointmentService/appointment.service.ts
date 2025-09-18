@@ -20,7 +20,7 @@ export class AppointmentService {
     return this.http.post(`${environment.apiUrl}/api/Appointment/CheckAvailability` , appoin);
   }
 
-  GetdoctorAppointments(id:string){
+  GetdoctorAppointments(id:string | null){
     return this.http.get<appSchedule[]>(`${environment.apiUrl}/api/Appointment/GetAppointmentByUserId/${id}`);
   }
 }

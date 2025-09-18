@@ -9,7 +9,7 @@
         <span>Note : Available Appointments :</span> 
         <h6 class="fw-lighter text-success text-decoration-underline"> <br> 
         <small *ngIf="doctor">
-            @for( ch of doctor.doctorProfile.consultationHours ; track ch.id; let last = $last){
+            @for( ch of doctor.doctorProfile.consultationHours ; track $index; let last = $last){
             {{ ch.dayOfWeek }} ({{ ch.startTime }} to {{ ch.endTime }})<span *ngIf="!last">, </span> <br>
             }
         </small>

@@ -46,6 +46,7 @@ import { SuccessComponent } from './components/success/success.component';
 import { HistoryComponent } from './components/history/history.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
+import { ReportComponent } from './components/report/report.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { PatientDetailsComponent } from './components/patient-details/patient-de
     HistoryComponent,
     CardPaymentComponent,
     PatientDetailsComponent,
+    ReportComponent,
     
     
   ],

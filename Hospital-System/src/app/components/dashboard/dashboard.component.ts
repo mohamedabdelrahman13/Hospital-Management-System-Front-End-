@@ -5,6 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input'; // optional, but good to have
 import { DashboardService } from '../../services/dashboard/dashboard.service';
 import { Subscription } from 'rxjs';
+import { patientStatsDTO } from '../../models/patientStatsDTO/patientStatsDTO';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+
 
 
   public totalPatients!:number
@@ -36,6 +38,7 @@ export class DashboardComponent implements OnInit {
   //revenue
 
   // patients trend 
+  public patientsTrendStats!:patientStatsDTO[]
   public patientsTrendLabels!:string[];
   public patientsTrendData!:number[];
   public patientsTrendchart!: ChartConfiguration['data'];
@@ -153,6 +156,7 @@ export class DashboardComponent implements OnInit {
     })
     
       this.dashboardService.getPatientsStats(this.selectedView).subscribe(resp => {
+      this.patientsTrendStats = resp;
       this.patientsTrendLabels = resp.map(x=>x.time); 
       this.patientsTrendData = resp.map(x=>x.numberOfPatients);
       this.assignPatientsTrendsChart(this.patientsTrendLabels , this.patientsTrendData);
@@ -161,7 +165,7 @@ export class DashboardComponent implements OnInit {
       this.dashboardService.getAppointmentsStats(this.selectedView).subscribe(resp => {
       this.appStatsLabels = resp.map(x=>x.time); 
       this.appStatsData = resp.map(x=>x.numberOfAppointments);
-      this.assignAppointmentChart(this.patientsTrendLabels , this.patientsTrendData);
+      this.assignAppointmentChart(this.appStatsLabels , this.appStatsData);
     })
     
      this.dashboardService.getDepartmentsStats().subscribe(resp => {
@@ -184,6 +188,7 @@ export class DashboardComponent implements OnInit {
     })
     
     this.dashboardService.getPatientsStats(view).subscribe((resp)=>{
+      this.patientsTrendStats = resp;
       this.patientsTrendLabels = resp.map(x=>x.time); 
       this.patientsTrendData = resp.map(x=>x.numberOfPatients);
       this.assignPatientsTrendsChart(this.patientsTrendLabels , this.patientsTrendData);
@@ -268,12 +273,12 @@ assignPatientsTrendsChart(labels:string[] , data:number[]){
         data: data,
         backgroundColor: '#1e1efc',
         borderRadius: 6,
-        barPercentage: 0.5
+        barPercentage: 0.5,
+        // barThickness:20    
       }
     ]
   }
 }
-
 
 
 

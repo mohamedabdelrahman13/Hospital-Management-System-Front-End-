@@ -23,8 +23,8 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      username : ['' , [Validators.required , Validators.maxLength(60) , Validators.minLength(5)]],
-      email : ['' , Validators.required],
+      username : ['' , [Validators.required , Validators.maxLength(60) , Validators.minLength(5) , Validators.pattern(/^[A-Za-z\s]+$/)]],
+      email : ['' , [Validators.required ,  Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu)$/)]],
       password:['' , Validators.required],
       phoneNumber : ['' , [Validators.required ,  Validators.pattern(/^[0-9]{11}$/)]],
       role : ['', Validators.required]
@@ -38,12 +38,11 @@ export class RegisterComponent implements OnInit{
     this.authService.register(this.registerForm.value).subscribe({
       next:(resp) =>{
         this.response = resp
-        if(this.response.statusCode = 200 ){
+        if(this.response.statusCode === 200 ){
              this.toastr.success(this.response.message);
-             console.log(this.response);
         }
-        else if(this.response.statusCode = 400){
-          this.toastr.error(this.response);
+        else if(this.response.statusCode === 400){
+          this.toastr.error(this.response.message);
         }
       },
 

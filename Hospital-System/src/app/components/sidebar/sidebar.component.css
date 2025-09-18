@@ -2,9 +2,7 @@
 
 .sidenav-container {
     height: 100vh;
-    /* background-image: url('/assets/hospital.jpg');
-    background-size: cover;
-    background-repeat: no-repeat; */
+
   }
   
 
@@ -23,14 +21,26 @@ a{
   flex-direction: row;
   align-items: center;
   white-space: nowrap;
-  /* height: var(--mat-toolbar-standard-height, 64px); */
 }
 
 header{
   color: black;
-  box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.2);
+  /* border-bottom: 3px solid var(--primary-color); */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-shadow: 0px 4px 6px rgba(4, 28, 90, 0.2);
 }
 
-.main-content{
+/* remove spaces in header */
+.px-5 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
+.menuBtn{
+ border: none;
+ background: none;
+ color: var(--primary-color);
+ padding: 0;
+ margin: 0;
 }

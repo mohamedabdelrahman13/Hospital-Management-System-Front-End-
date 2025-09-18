@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services/appointmentService/appointment.service';
 import { appSchedule } from '../../models/appointmentScedule/appointmentSchedule';
 import { PaymentService } from '../../services/paymentService/payment.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-appointment-schedule',
@@ -10,15 +11,17 @@ import { PaymentService } from '../../services/paymentService/payment.service';
   styleUrl: './appointment-schedule.component.css'
 })
 export class AppointmentScheduleComponent implements OnInit{
-  public appointments!:appSchedule[]
+  public appointments!:appSchedule[];
+  private userID!:string | null;
   constructor(private appointmentService:AppointmentService
-   ){
+   ,private activatedRoute:ActivatedRoute){
   }
   
-  id = '67de36b9-ab94-4c31-b888-96f58755df5c'
   
   ngOnInit(): void {
-    this.appointmentService.GetdoctorAppointments(this.id).subscribe((apps)=>{
+
+    this.userID = this.activatedRoute.snapshot.paramMap.get('userId');
+    this.appointmentService.GetdoctorAppointments(this.userID).subscribe((apps)=>{
       this.appointments = apps;
     })
   }

@@ -18,7 +18,6 @@ body {
  }
 
 
-
  button.btn {
     padding: 0.7rem 1.5rem;
     font-size: 1rem;
@@ -49,19 +48,6 @@ body {
     background-color: var(--primary-color);
     margin: 15px auto 50px auto;
 }
-
-/* .mainBtn{
-    --stop:20%;
-    border-radius: 10px;
-    padding: 10px;
-     background: #303f52;
-     background: radial-gradient(circle, rgb(59, 77, 99) var(--stop), var(--secondary-color) 100%); 
-    margin: 0 auto;
-    transition: all .4s ease;
-    background-color: var(--primary-color);
-    border: 1px solid var(--secondary-color);
-    color: white;
-} */
 
 .btn:disabled {
     background-color: #ccc;  
@@ -99,18 +85,25 @@ body {
     border-radius: 8px;
     padding: 0.6rem;
     font-size: 0.95rem;
-    border: 1px solid #ddd;
     transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  input.form-control {
+    border: 2px solid var(--primary-color);
   }
   
   input.form-control:focus ,.form-select:focus{
-    /* border-color: var(--primary-color); */
     box-shadow: 0 0 10px 1px var(--primary-color) !important; 
-    /* box-shadow: none; */
   }
-
+  
   .form-select:focus {
+    border: 2px solid var(--primary-color);
     box-shadow: none;
+  }
+  .form-select {
+    border: 2px solid var(--primary-color);
+    box-shadow: none;
+    padding: 0.6rem;
+    font-size: 0.95rem;
   }
   small {
     font-size: 0.85rem;

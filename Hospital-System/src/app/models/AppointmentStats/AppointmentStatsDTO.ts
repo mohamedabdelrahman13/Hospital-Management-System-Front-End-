@@ -1,4 +1,6 @@
 export interface appointmentStatsDTO{
     time:string,
-    numberOfAppointments:number
+    numberOfAppointments:number,
+    percentage:number
+
 }

@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit{
   IsDoctor:boolean = false;
   IsStaff:boolean = false;
   userEmail:string | null= '';
+  userId:string | null= '';
 
   constructor(private authService:AuthService,
     private toastr:ToastrService,
@@ -32,6 +33,7 @@ export class SidebarComponent implements OnInit{
     this.IsDoctor = this.authService.isInRole('Doctor');
     this.IsStaff = this.authService.isInRole('Staff');
     this.userEmail = this.authService.getUserEmail();
+    this.userId = this.authService.getUserId();
   }
   logout(){
     this.authService.logout();

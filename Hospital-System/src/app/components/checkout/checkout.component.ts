@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorService } from '../../services/doctorService/doctor.service';
 import { PatientService } from '../../services/PatientService/patient.service';
@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { appointmentViewModel } from '../../viewModels/Appointment/appointmentViewModel';
 import { AppointmentService } from '../../services/appointmentService/appointment.service';
 import { appointmentBookingDTO } from '../../models/AppointmentBookingDTO/appointmentBookingDTO';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-checkout',
@@ -19,6 +21,9 @@ import { appointmentBookingDTO } from '../../models/AppointmentBookingDTO/appoin
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit{
+  
+  @ViewChild('invoice') invoiceElement!:ElementRef;
+
   invoiceResponse!:invoiceResponse;
   patientName!: string;
   doctorName!: string;
@@ -128,6 +133,30 @@ export class CheckoutComponent implements OnInit{
           }
         });
     
+  }
+
+  printInvoice(){
+    const invoice = this.invoiceElement.nativeElement;
+
+    html2canvas(invoice, { scale: 2 }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      // const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdf = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: [80, 150]   // width = 80mm, height = 150mm
+      });
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      // Calculate width/height to fit A4
+      const imgProps = (pdf as any).getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Invoice_#${this.patientName}.pdf`);
+    });
   }
 
 }

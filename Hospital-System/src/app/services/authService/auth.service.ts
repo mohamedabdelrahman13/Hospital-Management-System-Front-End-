@@ -5,6 +5,7 @@ import { login } from '../../models/login/login';
 import { jwtDecode } from 'jwt-decode';
 import { register } from '../../models/register/register';
 import { BehaviorSubject } from 'rxjs';
+import { decodedToken } from '../../models/decode/decode';
 
 @Injectable({
   providedIn: 'root'
@@ -60,14 +61,19 @@ export class AuthService {
     if (!token) return [];
 
     const decoded: any = jwtDecode(token);
-
-    console.log(decoded);
     // check if the (decoded) const is an array of strings or only one string 
     if (Array.isArray(decoded.roles)) {
       return decoded.roles
     }
 
     return [decoded.roles]
+  }
+
+  getUserId(): string {
+    const token = this.getToken();
+    if (!token) return '';
+    const decoded: decodedToken = jwtDecode(token);
+    return decoded.Id;
   }
 
 
@@ -82,13 +88,7 @@ export class AuthService {
   isInRole(role: string): boolean {
     return this.getUserRoles().includes(role);
   }
-  // isInRole(role: string) {
-    
-  //   if (this.getUserRoles().includes(role))
-  //     this.checkRoles.next(true);
 
-  //   this.checkRoles.next(false);
-  // }
 
 }
 

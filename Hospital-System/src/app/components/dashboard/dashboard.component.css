@@ -111,7 +111,7 @@ background: linear-gradient(135deg, #ff6ec7, #d63384);
 
   &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 6px 14px 7px rgb(178, 177, 177);
+      box-shadow: 0 4px 10px 7px rgb(178, 177, 177);
     }
 
 }
@@ -146,4 +146,5 @@ background: linear-gradient(135deg, #ff6ec7, #d63384);
   }
 
 
-  
+
+ 

@@ -16,13 +16,16 @@
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
-                <div *ngIf="addPatientForm.get('birthDate')?.touched && addPatientForm.get('birthDate')?.invalid" class="text-danger">
-                    <small *ngIf="addPatientForm.get('birthDate')?.errors?.['required']">birth date is required</small>
+                <div *ngIf="addPatientForm.get('gender')?.touched && addPatientForm.get('gender')?.invalid" class="text-danger">
+                    <small *ngIf="addPatientForm.get('gender')?.errors?.['required']">gender is required</small>
                 </div>
             </div>
         </div>
         <div class="mb-3">
             <input type="date" class="form-control" formControlName="birthDate" id="date" placeholder="DOB">
+            <div *ngIf="addPatientForm.get('birthDate')?.touched && addPatientForm.get('birthDate')?.invalid" class="text-danger">
+                <small *ngIf="addPatientForm.get('birthDate')?.errors?.['required']">birth date is required</small>
+            </div>
         </div>
         
         <div class="mb-3">
