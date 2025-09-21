@@ -1,17 +1,26 @@
 <section>
-    <div class="my-2">
-        <label for="viewSelect">View by :</label>
+    <div class="my-2 d-flex justify-content-flex-start align-items-center">
+      <label for="viewSelect" class="mx-2">View by :</label>
+      <select id="viewSelect" class="form-select w-25" [(ngModel)]="selectedView" (change)="updateStats(selectedView)">
+        <option value="daily">Daily</option>
+        <option value="monthly">Monthly</option>    
+      </select>
+    </div>
+  </section>
+
+<!-- <section>
+    <div class="my-2 d-flex justify-content-flex-start align-items-center">
+        <label for="viewSelect" class="me-2">View by :</label>
         <select id="viewSelect" class="form-select" [(ngModel)]="selectedView" (change)="updateStats(selectedView)">
           <option value="daily">Daily</option>
           <option value="monthly">Monthly</option>
         </select>
     </div> 
-    <button [routerLink]="['/hospital-system/report']" class="btn">Report</button>
-</section>
+</section> -->
 <section class="p-2">
     <div class="row stats">
         <div class="stats-container col-12 col-md-6 col-lg-3">
-            <div class="stats-card d-flex justify-content-around align-items-center">
+            <div class="stats-card">
                 <div class="icon icon-patients">
                     <mat-icon>sick</mat-icon>
                 </div>
@@ -22,7 +31,7 @@
             </div>
         </div>
         <div class="stats-container col-12 col-md-6 col-lg-3">
-            <div class="stats-card d-flex justify-content-around align-items-center">
+            <div class="stats-card ">
                 <div class="icon icon-staff">
                     <mat-icon>groups</mat-icon>
                 </div>
@@ -33,7 +42,7 @@
             </div>
         </div>
         <div class="stats-container col-12 col-md-6 col-lg-3">
-            <div class="stats-card d-flex justify-content-around align-items-center">
+            <div class="stats-card ">
                 <div class="icon icon-costs">
                     <mat-icon>receipt_long</mat-icon>
                 </div>
@@ -44,7 +53,7 @@
             </div>
         </div>
         <div class="stats-container col-12 col-md-6 col-lg-3">
-            <div class="stats-card d-flex justify-content-around align-items-center">
+            <div class="stats-card ">
                 <div class="icon icon-revenue">
                     <mat-icon>attach_money</mat-icon>
                 </div>
@@ -92,10 +101,14 @@
         </div>
     </div>
 </section> 
-  
+
+
+<div class="text-center">
+    <button [routerLink]="['/hospital-system/report']" class="btn">Report</button>
+
+</div>
 
 
 
-<!-- Report Setion component -->
 
   

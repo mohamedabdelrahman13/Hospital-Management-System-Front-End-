@@ -27,7 +27,8 @@ section{
 .stats-container .stats-card{
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-around;
+  /* gap: 1rem; */
   background: #fff;
   padding: 1rem;
   border-radius: 1rem;

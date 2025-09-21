@@ -1,20 +1,16 @@
-    <Header>
-        <div class="title">
-            <h2  class="text-center  display-5 fw-bold">Book Appointment</h2>
-            <span class="line"></span>
-        </div>
-    </Header>
+
     <form [formGroup]="appointmentForm">
-        <!-- <legend class="text-center text-bold my-3">Book an appointment</legend> -->
-        <span>Note : Available Appointments :</span> 
-        <h6 class="fw-lighter text-success text-decoration-underline"> <br> 
-        <small *ngIf="doctor">
-            @for( ch of doctor.doctorProfile.consultationHours ; track $index; let last = $last){
-            {{ ch.dayOfWeek }} ({{ ch.startTime }} to {{ ch.endTime }})<span *ngIf="!last">, </span> <br>
+        <legend class="text-center text-bold my-3">Book an appointment</legend>
+        <span class="note-title">Note : Available Appointments :</span>
+        <div class="appointments-list" *ngIf="doctor">
+        <div class="appointment-item">
+            @for( ch of doctor.doctorProfile.consultationHours ; track $index; let last = $last ; let i = $index){
+            <span class="day" [style.color]="colors[i]">{{ ch.dayOfWeek }}  </span>
+            <span class="time">({{ ch.startTime }} to {{ ch.endTime }})</span> <span *ngIf="!last">, </span> <br>
             }
-        </small>
-        </h6>
-        <div class="row mb-3">
+        </div>
+        </div>
+        <div class="row mb-3 " >
             <div class="mb-3 col-md-6">
                 <label for="doctorName" class="form-label">Doctor</label>
                 <input type="text" id="doctorName" class="form-control" [value]="doctorName" disabled>
@@ -33,22 +29,32 @@
             <input type="text" id="cost" class="form-control" [value]="this.appCost" disabled>
         </div>
         <div class="mb-3">
-            <small class="fw-lighter text-secondary text-decoration-underline mb-5">please pick a corresponding date to the days available mentioned at the top</small>
             <div class="mb-3">
-                <input type="date" class="form-control" formControlName="date" id="date" placeholder="appointment date">
+                <label for="appDate" class="form-label me-2">Appointment Date</label>
+                <small class="text-secondary text-decoration-underline fst-italic fw-semibold mb-5">please pick a corresponding date to the days available mentioned at the top</small>
+                <input type="date" class="form-control" formControlName="date" id="appDate">
             </div>
-          </div>
-        <div class="mb-3">
-            <!-- Start Time -->
-            <label>Start Time:</label>
-            <timepicker [minuteStep]="30" formControlName="startTime" [showMeridian]="false"></timepicker>
-
-            <!-- End Time -->
-            <label>End Time:</label>
-            <timepicker formControlName="endTime"
-             [showMeridian]="false"></timepicker>
-
+            <div *ngIf="appointmentForm.get('date')?.touched && appointmentForm.get('date')?.invalid" class="text-danger">
+                <small *ngIf="appointmentForm.get('date')?.errors?.['required']">Appointment date is required</small>
+            </div>
         </div>
+
+        <!-- Start Time -->
+        <div class="mb-3">
+            <div>
+                <label>Start Time:</label>
+                <timepicker [minuteStep]="30" formControlName="startTime" [showMeridian]="false"></timepicker>
+            </div>
+            <div *ngIf="appointmentForm.get('startTime')?.touched && appointmentForm.get('startTime')?.invalid" class="text-danger">
+                <small *ngIf="appointmentForm.get('startTime')?.errors?.['required']">Appointment time is required</small>
+            </div>
+        </div>
+
+            
+        <!-- End Time -->
+        <label>End Time:</label>
+        <timepicker formControlName="endTime"
+         [showMeridian]="false"></timepicker>
 
 
         <!-- for submitting the form  -->

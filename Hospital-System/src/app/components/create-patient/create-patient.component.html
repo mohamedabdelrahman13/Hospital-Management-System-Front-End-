@@ -3,7 +3,8 @@
         <legend class="text-center text-bold my-3">Add new patient</legend>
         <div class="row mb-3">
             <div class="col-12 col-md-6">
-                <input type="text" class="form-control" formControlName="name" placeholder="Name">
+                <label for="patientName">Patient name</label>
+                <input type="text" id="patientName" class="form-control" formControlName="name">
                 <div *ngIf="addPatientForm.get('name')?.touched && addPatientForm.get('name')?.invalid" class="text-danger">
                     <small *ngIf="addPatientForm.get('name')?.errors?.['required']">Name is required</small>
                     <small *ngIf="addPatientForm.get('name')?.errors?.['maxlength']">Name must be between 6 ~ 60 characters Long</small>
@@ -12,7 +13,8 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 ">
-                <select class="form-select" formControlName="gender" aria-label="Default select example">
+                <label for="gender">Gender</label>
+                <select class="form-select" formControlName="gender" id="gender" aria-label="Default select example">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
@@ -22,13 +24,21 @@
             </div>
         </div>
         <div class="mb-3">
-            <input type="date" class="form-control" formControlName="birthDate" id="date" placeholder="DOB">
+            <label for="date">Date of birth</label>
+            <input type="date" class="form-control" formControlName="birthDate" id="date">
+            <!-- <div class="row">
+                <input type="text"
+                placeholder="Datepicker"
+                class="form-control"
+                bsDatepicker>
+            </div> -->
             <div *ngIf="addPatientForm.get('birthDate')?.touched && addPatientForm.get('birthDate')?.invalid" class="text-danger">
                 <small *ngIf="addPatientForm.get('birthDate')?.errors?.['required']">birth date is required</small>
             </div>
         </div>
         
-        <div class="mb-3">
+        <div class="mb-3">   
+            <label for="phone">Phone number</label>
             <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Phone number">
             <div *ngIf="addPatientForm.get('phone')?.touched && addPatientForm.get('phone')?.invalid" class="text-danger">
                 <small *ngIf="addPatientForm.get('phone')?.errors?.['required']">phone is required</small>

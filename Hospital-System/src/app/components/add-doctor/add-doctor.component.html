@@ -1,11 +1,11 @@
-
 <section>
     <form [formGroup]="addDoctorForm" (ngSubmit)="OnSubmit()">
         <legend class="text-center">Add Doctor Profile</legend>
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-12 col-md-6">
+                <label for="dept" class="form-label">Department</label>
                 <select class="form-select" formControlName="departmentID" aria-label="Default select example">
-                    <option value=""selected disabled>select department</option>
+                    <option value="" selected disabled>select department</option>
                     @for(dept of departments ; track dept.id){
                     <option [value]="dept.id">{{dept.ar_Name}}</option>
                     }
@@ -17,8 +17,9 @@
                 </div>
             </div>
             <div class="col-12 col-md-6">
-                <select class="form-select" formControlName="userId" aria-label="Default select example">
-                    <option value=""selected disabled>select user</option>
+                <label for="dept" class="form-label">user name</label>
+                <select id="userName" class="form-select" formControlName="userId" aria-label="Default select example">
+                    <option value="" selected disabled>select user</option>
                     @for(d of doctorsWithoutProfiles ; track d.id){
                     <option [value]="d.id">{{d.userName}}</option>
                     }
@@ -29,11 +30,12 @@
                 </div>
             </div>
         </div>
-        <div class="my-3">
-            <input type="number" class="form-control" formControlName="cost" id="cost" placeholder="cost">
-            <div *ngIf="addDoctorForm.get('cost')?.touched && addDoctorForm.get('cost')?.invalid"
-                class="text-danger">
-                <small *ngIf="addDoctorForm.get('cost')?.errors?.['required']">user is required</small>
+        <div class="mb-3">
+            <label for="cost" class="form-label">cost</label>
+            <input type="number" class="form-control" formControlName="cost" id="cost"
+                placeholder="must be between 200 ~ 1500">
+            <div *ngIf="addDoctorForm.get('cost')?.touched && addDoctorForm.get('cost')?.invalid" class="text-danger">
+                <small *ngIf="addDoctorForm.get('cost')?.errors?.['required']">cost is required</small>
                 <small *ngIf="addDoctorForm.get('cost')?.errors?.['min']">Cost must be at least 200.</small>
                 <small *ngIf="addDoctorForm.get('cost')?.errors?.['max']">Cost cannot exceed 1500.</small>
             </div>
@@ -41,25 +43,29 @@
         <!-- Consultation Hours -->
         <div formArrayName="consultationHourDTOs">
             <div *ngFor="let group of consultationHourDTOs.controls; let i = index" [formGroupName]="i">
-
-                <label>Day of Week</label>
-                  <select class="form-select" formControlName="dayOfWeek" aria-label="Default select example">
-                      <option value="" disabled selected>select a day</option>
-                    @for(day of daysOfWeek ; track day){
-                    <option [value]="day">{{day}}</option>
-                    }
-                </select>
+                <div class="mb-3">
+                    <label>Day of Week</label>
+                    <select class="form-select" formControlName="dayOfWeek" aria-label="Default select example">
+                        <option value="" disabled selected>select a day</option>
+                        @for(day of daysOfWeek ; track day){
+                        <option [value]="day">{{day}}</option>
+                        }
+                    </select>
+                </div>
                 <!-- Start Time -->
-                <label>Start Time:</label>
-                <timepicker [minuteStep]="30" formControlName="startTime" [showMeridian]="false"></timepicker>
+                <div class="mb-3">
+                    <label>Start Time:</label>
+                    <timepicker [minuteStep]="30" formControlName="startTime" [showMeridian]="false"></timepicker>
+                </div>
 
                 <!-- End Time -->
-                <label>End Time:</label>
-                <timepicker formControlName="endTime" [showMeridian]="false"></timepicker>
+                <div class="mb-3">
+                    <label>End Time:</label>
+                    <timepicker formControlName="endTime" [showMeridian]="false"></timepicker>
+                </div>
                 <div class="text-center">
-                    
                     <button class="mb-2 remove" type="button" (click)="removeConsultationHour(i)"
-                    *ngIf="consultationHourDTOs.length > 1">- remove</button>
+                        *ngIf="consultationHourDTOs.length > 1">- remove</button>
                 </div>
             </div>
         </div>

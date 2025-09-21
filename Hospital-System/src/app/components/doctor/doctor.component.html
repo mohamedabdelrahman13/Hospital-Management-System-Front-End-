@@ -1,40 +1,51 @@
 <Header>
-    <div class="title">
-        <h2 class="text-center  display-5 fw-bold">Doctors</h2>
-        <span class="line"></span>
-    </div>
+  <div class="title">
+    <h2 class="text-center  display-5 fw-bold">Doctors</h2>
+    <span class="line"></span>
+  </div>
 </Header>
 
-<div class="m-5">
-    <button [routerLink]="['/hospital-system/addDoctor']" routerLinkActive="router-link-active"  class="icon-text-column">
-        <mat-icon>add</mat-icon>
-        <span>Add Doctor Profile</span>
-    </button>
-</div>
-<div class="container">
-    <div class="row g-3">
-      @for (doc of doctors; track doc.id) {
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card h-auto text-center">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Dr. {{ doc.userName }}</h5>
-              <h6 class="card-subtitle mb-2 text-body-tertiary  ">{{ doc.doctorProfile.speciality }}</h6>
-              <h6 class="card-subtitle mb-2  ">{{ doc.doctorProfile.cost | currency:'EGP' : 'symbol'}}</h6>
+  <section>
+    <div class="my-2 d-flex justify-content-flex-start align-items-center">
+      <label for="viewSelect" class="mx-2">Speciality :</label>
+      <select id="viewSelect" class="form-select w-50" [(ngModel)]="selectedDepartment" (change)="updateDoctors(selectedDepartment)">
+        @for (dept of departments; track dept.id) {
+          <option [value]="dept.name">{{dept.ar_Name}}</option>
+        }
+      </select>
+    </div>
+  </section>
 
-              <h6 class="card-text">
-                <h6 class="text-success">available on:</h6>
-                @for (ch of doc.doctorProfile.consultationHours; track $index; let last = $last) {
-                  {{ ch.dayOfWeek }} ({{ ch.startTime }} - {{ ch.endTime }})<span *ngIf="!last">, </span>
-                }
-              </h6>
-  
-              <div class="mt-auto">
-                <button class="btn btn-sm me-2" (click)="goToAppointment(doc.id)">Appointment →</button>
-              </div>
-            </div>
+
+<!-- <div class="m-5">
+  <button [routerLink]="['/hospital-system/addDoctor']" routerLinkActive="router-link-active" class="icon-text-column">
+    <mat-icon>add</mat-icon>
+    <span>Add Doctor Profile</span>
+  </button>
+</div> -->
+<div class="container">
+  <div class="row g-3">
+    @for (doc of doctors; track doc.id) {
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-auto text-center">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Dr. {{ doc.userName }}</h5>
+          <h6 class="card-subtitle mb-2 text-body-tertiary  ">{{ doc.doctorProfile.speciality }}</h6>
+          <h6 class="card-subtitle mb-2  ">{{ doc.doctorProfile.cost | currency:'EGP' : 'symbol'}}</h6>
+
+          <h6 class="card-text">
+            <h6 class="text-success">available on:</h6>
+            @for (ch of doc.doctorProfile.consultationHours; track $index; let last = $last) {
+            {{ ch.dayOfWeek }} ({{ ch.startTime }} - {{ ch.endTime }})<span *ngIf="!last">, </span>
+            }
+          </h6>
+
+          <div class="mt-auto">
+            <button class="btn btn-sm me-2" (click)="goToAppointment(doc.id)">Appointment →</button>
           </div>
         </div>
-      }
+      </div>
     </div>
+    }
   </div>
-  
+</div>

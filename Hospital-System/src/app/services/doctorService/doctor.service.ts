@@ -15,8 +15,8 @@ export class DoctorService {
     return this.http.get<doctorViewModel[]>(`${environment.apiUrl}/api/Doctor/GetAllDoctorsWithoutProfile`);
   }
 
-  getAllDoctorsWithProfile(){
-    return this.http.get<doctorViewModel[]>(`${environment.apiUrl}/api/Doctor/GetAllDoctorsWithProfile`);
+  getAllDoctorsWithProfile(speciality:string){
+    return this.http.get<doctorViewModel[]>(`${environment.apiUrl}/api/Doctor/GetAllDoctorsWithProfile/${speciality}`);
   }
 
   // getDoctorById(id:string | null){

@@ -1,17 +1,36 @@
-<div class="appointments-container">
-    <h2>Doctor's Appointments</h2>
-  
+
+<Header>
+  <div class="title">
+      <h2  class="text-center  display-5 fw-bold">Doctor's Appointments</h2>
+      <span class="line"></span>
+  </div>
+</Header>
+<div class="appointments-container">  
     @for(app of appointments ; track app.id){
     <div class="appointment-card" >
       <div class="appointment-header">
         <span class="appointment-date">{{app.date}}</span>
-        <span class="appointment-time">{{app.startTime}}</span>
+        <span class="appointment-time">{{app.startTime}}</span> 
       </div>
       <div class="appointment-body">
         <p><strong>Doctor:</strong> {{app.doctorName}}</p>
         <p><strong>Patient:</strong> {{app.patientName}}</p>
       </div>
+      <p class="appointment-status">
+        <strong>Status: </strong> 
+        <span class="fw-semibold text-decoration-underline"
+        [class.text-primary]="app.status === 'Scheduled'" 
+        [class.text-danger]="app.status === 'Cancelled'" 
+        [class.text-success]="app.status === 'Completed'">
+          {{ app.status }}
+        </span>
+      </p>
+
+      <div class="appointment-actions">
+        <button (click)="markCompleted(app.id)" class="btn me-3" >Mark as Completed</button>
+        <button (click)="markCancelled(app.id)" class="btn" >Mark as Cancelled</button>
+      </div>
     </div>
 }
-  </div>
+</div>
   

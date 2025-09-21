@@ -28,7 +28,7 @@ export class AppointmentComponent implements OnInit {
   public patientName!: string;
   public appCost!:number;
   public speciality!: string;
- 
+ colors : string[] = ['red' , 'green' , 'blue' , 'yellow']
   public appointmentForm!: FormGroup;
   constructor(private activatedRoute: ActivatedRoute,
     private patientService: PatientService,
@@ -75,7 +75,6 @@ export class AppointmentComponent implements OnInit {
         this.appointmentForm.patchValue({
           cost:this.doctor.doctorProfile.cost
         })
-        console.log(doc)
         this.appCost = doc.doctorProfile.cost
         this.doctorName = doc.userName;
         this.speciality = doc.doctorProfile.speciality;

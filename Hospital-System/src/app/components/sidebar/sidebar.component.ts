@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit{
   isSidebarOpen:boolean = true; 
-  IsAdmin:boolean = false;
-  IsDoctor:boolean = false;
-  IsStaff:boolean = false;
+  isAdmin:boolean = false;
+  isDoctor:boolean = false;
+  isStaff:boolean = false;
   userEmail:string | null= '';
   userId:string | null= '';
 
@@ -29,9 +29,9 @@ export class SidebarComponent implements OnInit{
     // this.authService.isInRole('Admin');
     // this.authService.$checkRoles().subscribe((roleStatus) => this.checkIsInRole = roleStatus);
 
-    this.IsAdmin = this.authService.isInRole('Admin');
-    this.IsDoctor = this.authService.isInRole('Doctor');
-    this.IsStaff = this.authService.isInRole('Staff');
+    this.isAdmin = this.authService.isInRole('Admin');
+    this.isDoctor = this.authService.isInRole('Doctor');
+    this.isStaff = this.authService.isInRole('Staff');
     this.userEmail = this.authService.getUserEmail();
     this.userId = this.authService.getUserId();
   }

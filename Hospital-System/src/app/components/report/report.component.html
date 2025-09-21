@@ -1,7 +1,7 @@
 <section>
-    <div class="my-2">
-        <label for="viewSelect">View by :</label>
-        <select id="viewSelect" class="form-select" [(ngModel)]="selectedView" (change)="updateStats(selectedView)">
+    <div class="my-2 d-flex justify-content-flex-start align-items-center">
+        <label for="viewSelect" class="me-2">View by :</label>
+        <select id="viewSelect" class="form-select w-25" [(ngModel)]="selectedView" (change)="updateStats(selectedView)">
           <option value="daily">Daily</option>
           <option value="monthly">Monthly</option>
         </select>
@@ -40,12 +40,29 @@
           </tr>
         </thead>
         <tbody>
-          @for(item of patientsTrendStats; track $index){
+          @for(item of patientsTrendStats; track $index ; let i = $index ; let f = $first){
             <tr>
             <td *ngIf="this.selectedView === 'daily'">{{item.time | date:'mediumDate'}}</td>
             <td *ngIf="this.selectedView === 'monthly'">{{item.time | date:'MMMM yyyy'}}</td>
             <td>{{item.numberOfPatients}}</td>
-            <td>{{item.percentage}} %</td>
+            @if( i < patientsTrendStats.length - 1){
+              @if(f){
+                <td class="text-success">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_up</mat-icon></td>
+              }   
+              @else if(patientsTrendStats[i].percentage > patientsTrendStats[i-1].percentage){
+                <td class="text-success">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_up</mat-icon></td>
+              }
+              @else if(patientsTrendStats[i].percentage < patientsTrendStats[i-1].percentage){
+                <td class="text-danger">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_down</mat-icon></td>
+              }
+              @else if(patientsTrendStats[i].percentage == patientsTrendStats[i-1].percentage){
+                <td class="text-secondary">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_flat</mat-icon></td>
+              }
+              
+            }
+            @else {
+              <td class="text-secondary">{{ item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_flat</mat-icon> </td>
+            }
           </tr>
           }
         </tbody>
@@ -75,13 +92,30 @@
           </tr>
         </thead>
         <tbody>
-          @for(item of appStats; track $index){
+          @for(item of appStats; track $index ; let i = $index ; let f = $first){
             <tr>
               <td *ngIf="this.selectedView === 'daily'">{{item.time | date:'mediumDate'}}</td>
               <td *ngIf="this.selectedView === 'monthly'">{{item.time | date:'MMMM yyyy'}}</td>
                 <td>{{item.numberOfAppointments}}</td>
-                <td>{{item.percentage}} %</td>
-            </tr>
+                @if( i < appStats.length - 1){
+                  @if(f){
+                    <td class="text-success">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_up</mat-icon></td>
+                  }   
+                  @else if(appStats[i].percentage > appStats[i-1].percentage){
+                    <td class="text-success">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_up</mat-icon></td>
+                  }
+                  @else if(appStats[i].percentage < appStats[i-1].percentage){
+                    <td class="text-danger">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_down</mat-icon></td>
+                  }
+                  @else if(appStats[i].percentage == appStats[i-1].percentage){
+                    <td class="text-secondary">{{item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_flat</mat-icon></td>
+                  }
+                  
+                }
+                @else {
+                  <td class="text-secondary">{{ item.percentage}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_flat</mat-icon> </td>
+                }
+              </tr>
           }
         </tbody>
       </table>
@@ -110,11 +144,27 @@
           </tr>
         </thead>
         <tbody>
-          @for(item of revenueStats; track $index){
+          @for(item of revenueStats; track $index ; let i = $index ; let f = $first){
             <tr>
               <td *ngIf="this.selectedView === 'daily'">{{item.time | date:'mediumDate'}}</td>
               <td *ngIf="this.selectedView === 'monthly'">{{item.time | date:'MMMM yyyy'}}</td>
-              <td>{{item.revenue}}</td>
+              @if( i < revenueStats.length - 1){     
+                @if(f){
+                  <td class="text-success">{{item.revenue | currency:'EGP'}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_up</mat-icon></td>
+                }
+                @else if(revenueStats[i].revenue > revenueStats[i-1].revenue){
+                  <td class="text-success">{{item.revenue | currency:'EGP'}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_up</mat-icon></td>
+                }
+                @else if(revenueStats[i].revenue < revenueStats[i-1].revenue){
+                  <td class="text-danger">{{item.revenue | currency:'EGP'}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_down</mat-icon></td>
+                }
+                @else if(revenueStats[i].revenue == revenueStats[i-1].revenue){
+                  <td class="text-secondary">{{item.revenue | currency:'EGP'}} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_flat</mat-icon></td>
+                }
+              }
+              @else {
+                <td class="text-secondary">{{ item.revenue | currency:'EGP' }} <mat-icon class="ms-1" style="vertical-align: middle; font-size: 20px;">trending_flat</mat-icon> </td>
+              }
             </tr>
           }
         </tbody>
@@ -128,6 +178,16 @@
     </section>
     <!-- Section: Revenue Distribution -->
     
+
+    <section class="report-section">
+      <h2>Other Statistics</h2>
+      <ul class="stats-list fw-bold">
+        <li><strong>Total number of Patients : </strong> <span style="color: var(--primary-color);">{{ patientsNumber }}</span></li>
+        <li><strong>Available staff : </strong> <span style="color: var(--primary-color);">{{ staffNumber }}</span></li>
+        <li><strong>Average treatment cost : </strong> <span style="color: var(--primary-color);">{{ averageCost | currency:'EGP' }}</span></li>
+      </ul>
+    </section>
+  
 
 
     <!-- Footer -->

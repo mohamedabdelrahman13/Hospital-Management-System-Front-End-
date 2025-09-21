@@ -19,37 +19,43 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ReportComponent } from './components/report/report.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: 'login', component: LoginComponent},
-  
-  {path: 'hospital-system' , component:SidebarComponent , canActivate:[authGuard] , children:[
-    {path: 'patient', component: PatientComponent, children: [
-      { path: '', pathMatch: 'full', redirectTo: 'create-Patient' },
-      { path: 'create-Patient', component: CreatePatientComponent },
-      { path: 'search-Patient', component: SearchPatientComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
+
+  //canActivate = runs when entering hospital-system only ,
+  //canActivateChild = runs when entering any child of hospital-system
+  {
+    path: 'hospital-system', component: SidebarComponent, canActivateChild: [authGuard], children: [
+
+      {
+        path: 'patient', component: PatientComponent, canActivate: [roleGuard], data: { roles: ["Staff"] }, children: [
+          { path: '', pathMatch: 'full', redirectTo: 'create-Patient' },
+          { path: 'create-Patient', component: CreatePatientComponent },
+          { path: 'search-Patient', component: SearchPatientComponent }
+        ]
+      },
+
+      { path: 'report', component: ReportComponent, canActivate: [roleGuard], data: { roles: ["Admin"] } },
+      { path: 'patient-details/:patientId', component: PatientDetailsComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
+      { path: 'register', component: RegisterComponent, canActivate: [roleGuard], data: { roles: ["Admin"] } },
+      { path: 'edit-patient/:id', component: EditPatientComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [roleGuard], data: { roles: ["Admin"] } },
+      { path: 'app-Schedule/:userId', component: AppointmentScheduleComponent, canActivate: [roleGuard], data: { roles: ["Doctor"] } },
+      { path: 'doctor', component: DoctorComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
+      { path: 'doctor/:patientId', component: DoctorComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
+      { path: 'appointment/:patientId/:doctorId', component: AppointmentComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
+      { path: 'addDoctor', component: AddDoctorComponent, canActivate: [roleGuard], data: { roles: ["Admin"] } },
+      { path: 'checkout', component: CheckoutComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
+      { path: 'card-payment', component: CardPaymentComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
+      { path: '', pathMatch: 'full', redirectTo: 'hospital-system' },
+
     ]
   },
 
-
-  { path: 'report', component: ReportComponent},
-  { path: 'patient-details/:patientId', component: PatientDetailsComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'edit-patient/:id', component: EditPatientComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'app-Schedule/:userId', component: AppointmentScheduleComponent},
-  { path: 'doctor', component: DoctorComponent},
-  { path: 'doctor/:patientId', component: DoctorComponent },
-  { path: 'department', component: DepartmentComponent },
-  { path: 'appointment/:patientId/:doctorId', component: AppointmentComponent },
-  { path: 'addDoctor', component: AddDoctorComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'card-payment', component: CardPaymentComponent},
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  
-  ]},
-  
 
 
 ];

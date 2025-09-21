@@ -22,6 +22,9 @@ export class ReportComponent implements OnInit{
   heighestAppStatsDay!:string
   heighestRevenueDay!:string;
   heighestRevenueMonth!:string;
+  patientsNumber!:number;
+  staffNumber!:number;
+  averageCost!:number;
 
   @ViewChild('report') reportElement!: ElementRef;
   public patientsTrendStats!:patientStatsDTO[];
@@ -65,7 +68,13 @@ export class ReportComponent implements OnInit{
       this.heighestRevenueDay = heighestDay.time;
     })
     //Revenue Distribution Stats .........
-    
+
+
+    // other statistics 
+    this.dashboardService.getPatientsNumber().subscribe(patients => this.patientsNumber = patients)
+    this.dashboardService.getAverageCost().subscribe(avg => this.averageCost = avg)
+    this.dashboardService.getTotalStaff().subscribe(staff => this.staffNumber = staff)
+
   }
 
 
@@ -135,15 +144,13 @@ export class ReportComponent implements OnInit{
 
   exportPDF() {
     const report = this.reportElement.nativeElement;
-
     html2canvas(report, { scale: 2 }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-
-      // Calculate width/height to fit A4
+      const pdfWidth = 210;
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight]);
       const imgProps = (pdf as any).getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      // const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save('Hospital-Report.pdf');

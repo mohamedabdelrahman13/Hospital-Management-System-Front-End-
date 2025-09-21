@@ -1,18 +1,23 @@
-<form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
+<section>
+    <form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
         <legend class="text-center text-bold my-3">Login</legend>
-        <div class=" ">
+        <div>
             <div class="mb-3">
                 <input type="text" class="form-control" formControlName="email" placeholder="Email">
                 <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-danger">
                     <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</small>
                 </div>
             </div>
-               <div>
-                    <input type="password" class="form-control" formControlName="password" placeholder="Password">
-                    <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger">
-                        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
-                    </div>
-               </div>
+            <div>
+                <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+                    class="text-danger">
+                    <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+                </div>
+            </div>
+        </div>
         <div class="submit-btn">
             <button class="btn" [disabled]="this.loginForm.invalid" type="submit">Submit</button>
         </div>
+    </form>
+</section>

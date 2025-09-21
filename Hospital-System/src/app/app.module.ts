@@ -47,6 +47,8 @@ import { HistoryComponent } from './components/history/history.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ReportComponent } from './components/report/report.component';
+import { authorizationInterceptor } from './Interceptors/authorization.interceptor';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -74,8 +76,7 @@ import { ReportComponent } from './components/report/report.component';
     CardPaymentComponent,
     PatientDetailsComponent,
     ReportComponent,
-    
-    
+    UnauthorizedComponent,  
   ],
   imports: [
     MatFormFieldModule,
@@ -106,7 +107,9 @@ import { ReportComponent } from './components/report/report.component';
     }),
     NgChartsModule
   ],
-  providers: [provideNativeDateAdapter() , provideHttpClient(withFetch() , withInterceptors([loaderInterceptor])) , DatePipe],
+  providers: [provideNativeDateAdapter()
+     , provideHttpClient(withFetch(), withInterceptors([loaderInterceptor, authorizationInterceptor])) 
+         , DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

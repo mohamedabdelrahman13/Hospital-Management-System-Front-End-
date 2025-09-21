@@ -10,11 +10,17 @@ export const authGuard: CanActivateFn = (route, state) => {
   const toastr = inject(ToastrService)
 
   if(authService.isLoggedIn()){
+    if(authService.isTokenExpired()){
+      authService.logoutWithExpiry();
+      return router.createUrlTree(['/login']);
+    }
+
     return true
   }
+
   else{
-    router.navigateByUrl('/login');
-    return false;
+    toastr.info('Please log in to continue');
+    return router.createUrlTree(['/login']);
   }
 
 };

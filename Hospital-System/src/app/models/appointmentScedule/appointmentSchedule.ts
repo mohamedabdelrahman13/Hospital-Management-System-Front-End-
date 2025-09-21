@@ -4,6 +4,7 @@ export interface appSchedule{
     startTime:string,
     endTime:string,
     doctorName:string,
-    patientName:string
+    patientName:string,
+    status:string
 
 }

@@ -1,35 +1,40 @@
 <mat-sidenav-container class="sidenav-container ">
   <!-- Sidebar -->
-  <mat-sidenav style="background-color: rgb(208, 207, 207); width: 18%; padding: 1rem;" class="sidenav border-3" #drawer mode="side"
+  <mat-sidenav class="sidenav border-3" #drawer mode="side"
     [(opened)]="isSidebarOpen">
+
+    <div class="menu-header text-center">
+      <h4 class="menu-title">Menu</h4>
+      <hr class="menu-divider">
+    </div>
     <mat-nav-list>
-      <div class="d-flex justify-content-center">
+      <div *ngIf="isStaff">
         <button class="btn d-flex flex-row justify-content-between mb-3 " [routerLink]="['/hospital-system/patient']">
           <span>Appointment</span>
           <mat-icon class="mx-2">add</mat-icon>
         </button>
       </div>
-      <a mat-list-item [routerLink]="['/hospital-system/dashboard']" routerLinkActive="router-link-active">
+      <a mat-list-item [routerLink]="['/hospital-system/dashboard']" routerLinkActive="router-link-active" *ngIf="isAdmin">
         <mat-icon matListItemIcon class="mx-2">dashboard</mat-icon>
         <span matListItemTitle>Dashboard</span>
       </a>
-      <a mat-list-item [routerLink]="['/hospital-system/patient']" routerLinkActive="router-link-active">
+      <a mat-list-item [routerLink]="['/hospital-system/patient']" routerLinkActive="router-link-active" *ngIf="isStaff">
         <mat-icon matListItemIcon class="mx-2">sick</mat-icon>
         <span matListItemTitle>Patients</span>
       </a>
-      <a mat-list-item [routerLink]="['/hospital-system/doctor']" routerLinkActive="router-link-active">
+      <a mat-list-item [routerLink]="['/hospital-system/doctor']" routerLinkActive="router-link-active" *ngIf="isStaff">
         <mat-icon matListItemIcon class="mx-2">medical_services</mat-icon>
         <span matListItemTitle>Doctors</span>
       </a>
-      <a mat-list-item [routerLink]="['/hospital-system/department']" routerLinkActive="router-link-active">
-        <mat-icon matListItemIcon class="mx-2">apartment</mat-icon>
-        <span matListItemTitle>Department</span>
+      <a mat-list-item [routerLink]="['/hospital-system/addDoctor']" routerLinkActive="router-link-active" *ngIf="isAdmin">
+        <mat-icon matListItemIcon class="mx-2">medical_services</mat-icon>
+        <span matListItemTitle>Add doctor profile</span>
       </a>
-      <a mat-list-item [routerLink]="['/hospital-system/register']" routerLinkActive="router-link-active">
+      <a mat-list-item [routerLink]="['/hospital-system/register']" routerLinkActive="router-link-active" *ngIf="isAdmin">
         <mat-icon matListItemIcon class="mx-2">person_add</mat-icon>
         <span matListItemTitle>Register</span>
       </a>
-      <a mat-list-item  [routerLink]="['/hospital-system/app-Schedule', userId]"  routerLinkActive="router-link-active">
+      <a mat-list-item  [routerLink]="['/hospital-system/app-Schedule', userId]"  routerLinkActive="router-link-active" *ngIf="isDoctor">
         <mat-icon matListItemIcon class="mx-2">calendar_today</mat-icon>
         <span matListItemTitle>App.Schedule</span>
       </a>
@@ -48,10 +53,10 @@
       <header class="mb-3 w-100">
         <div class="d-flex justify-content-between py-1 px-2">
           <div class="d-flex justify-content-start align-items-center w-100">
-            <!-- <button class="menuBtn pt-1"(click)="drawer.toggle()">
+            <button class="menuBtn pt-1"(click)="drawer.toggle()">
               <mat-icon *ngIf="!isSidebarOpen">menu</mat-icon>
               <mat-icon *ngIf="isSidebarOpen">close</mat-icon>
-            </button> -->
+            </button>
             <span class="app-name ms-2 fs-5">Hospital System</span>
           </div>
           <!-- <span class="spacer"></span> -->

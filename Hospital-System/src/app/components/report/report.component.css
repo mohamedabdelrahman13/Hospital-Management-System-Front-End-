@@ -1,5 +1,4 @@
 .report-wrapper {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     max-width: 950px;
     margin: auto;
     background: #fff;
@@ -73,7 +72,7 @@
   }
   
   .report-table tr:nth-child(even) {
-    background: #f9f9f9;
+    background: #d5d4d4;
   }
   
   /* Summary text */

@@ -38,14 +38,22 @@ export class LoginComponent implements OnInit{
         if(this.response.statusCode === 200){
           this.toastr.success('Logged in successfully!');
           this.authService.saveToken(this.response.token);
-          if(this.authService.isInRole('Admin'))
-              this.router.navigate(['/dashboard'])
-          else if(this.authService.isInRole('Doctor'))
-              this.router.navigateByUrl('/hospital-system/app-Schedule')
-          else if(this.authService.isInRole('Staff'))
-              this.router.navigateByUrl('/hospital-system/patient')
-          this.router.navigateByUrl('/hospital-system')
-          this.response.Token;
+
+          
+          if(this.authService.isInRole('Admin')){
+            this.router.navigate(['/hospital-system/dashboard']);
+            this.authService.getUserEmail();
+          }
+          else if(this.authService.isInRole('Doctor')){
+            const userId = this.authService.getUserId();
+            this.router.navigateByUrl(`/hospital-system/app-Schedule/${userId}`);
+          }    
+          else if(this.authService.isInRole('Staff')){
+            this.router.navigateByUrl('/hospital-system/patient')
+          } 
+          else{
+            this.router.navigateByUrl('/hospital-system');
+          }
         }
         else if(this.response.statusCode === 400){
           this.toastr.error(this.response.message);

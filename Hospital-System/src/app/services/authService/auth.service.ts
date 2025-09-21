@@ -6,6 +6,8 @@ import { jwtDecode } from 'jwt-decode';
 import { register } from '../../models/register/register';
 import { BehaviorSubject } from 'rxjs';
 import { decodedToken } from '../../models/decode/decode';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +17,15 @@ export class AuthService {
   private readonly tokenKey = 'auth_token';
 
   checkRoles = new BehaviorSubject<boolean>(false);
-
-  $checkRoles() {
-    return this.checkRoles.asObservable();
-  }
-  constructor(private http: HttpClient) { }
-
+  
+  constructor(private http: HttpClient
+    ,private toastr:ToastrService
+    ,private router:Router) { }
+  
+    $checkRoles() {
+      return this.checkRoles.asObservable();
+    }
+  
   login(login: login) {
     return this.http.post<string>(`${environment.apiUrl}/api/Account/Login`, login);
   }
@@ -32,7 +37,6 @@ export class AuthService {
   register(registerData: register) {
     return this.http.post<register>(`${environment.apiUrl}/api/Account/Register`, registerData);
   }
-
 
   saveToken(token: string) {
     localStorage.setItem(this.tokenKey, token);
@@ -67,6 +71,27 @@ export class AuthService {
     }
 
     return [decoded.roles]
+  }
+
+
+  //check if the token is expired...
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    try {
+      const decoded:any = jwtDecode(token);
+      const expiry = decoded.exp * 1000; // convert seconds → ms
+      return Date.now() > expiry;
+    } catch (err) {
+      return true; // invalid token
+    }
+  }
+
+  logoutWithExpiry(): void {
+    this.logout();
+    this.toastr.warning('Login session has expired');
+    this.router.navigate(['/login']);
   }
 
   getUserId(): string {

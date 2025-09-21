@@ -1,0 +1,23 @@
+.note-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+  }
+  
+  .appointments-list {
+    margin-top: 6px;
+    padding-left: 10px;
+  }
+  
+  .appointment-item {
+    font-weight: 900;
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    display: inline-block;
+    width: fit-content;
+    box-shadow: 0 2px 4px 6px rgba(0,0,0,0.1);
+  }
