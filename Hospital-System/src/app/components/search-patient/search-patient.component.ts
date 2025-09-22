@@ -24,13 +24,6 @@ export class SearchPatientComponent {
   }
 
   ngOnInit(): void {
-    var subscritpion1 = this.patientService.getAllPatients().subscribe({
-      next: (patients) => { this.patientsList = patients},
-      error: (err) => { console.log(err) }
-    })
-
-    this.subscriptions.push(subscritpion1);
-
     this.searchSubject.pipe(debounceTime(500) , distinctUntilChanged())
     .subscribe(searchValue => this.filterPatients(searchValue))
   }
@@ -62,13 +55,4 @@ export class SearchPatientComponent {
   goToPatientDetails(id:string){
     this.router.navigate(['/hospital-system/patient-details' , id]);
   }
-
-  //unsubscribe all observables when leaving the component ...
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subs => {
-      subs.unsubscribe();
-    });
-  }
-
-
 }

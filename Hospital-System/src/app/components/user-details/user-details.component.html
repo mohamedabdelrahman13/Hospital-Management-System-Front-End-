@@ -1,0 +1,53 @@
+<Header>
+    <div class="title">
+      <h2 class="text-center  display-5 fw-bold">Users</h2>
+      <span class="line"></span>
+    </div>
+  </Header>
+<section>
+    <form class="d-flex text-center" role="search">
+      <input class="form-control me-2 w-100 w-md-50 "
+      name="search"
+      [(ngModel)]="searchText" 
+      (ngModelChange)="onSearchChange($event)"
+      type="search" 
+      placeholder="search by name..." 
+      aria-label="Search"/>
+    </form>
+
+    <div class="search-results">
+      <div class="container">
+            <table *ngIf="this.filteredUsers" class="table table-striped text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>   
+                    @for(user of filteredUsers ; track user.id){
+                        <tr>
+                            <td>{{user.userName}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.phoneNumber}}</td>
+                            @if(user.isDeleted === false){
+                                <td class="text-success"> Active </td>
+                            }
+                            @else{
+                                <td class="text-danger">Deleted</td>
+                            }
+                            <td><a class="btn btn-danger" (click)="deleteUser(user.id)"> Delete </a></td>
+                        </tr>
+                    }
+                    @empty{
+                      <div class="emptyMessage c-danger text-center">
+                         <h4>no user with specified name </h4>
+                      </div>
+                    }
+                  </tbody>
+                </table>
+        </div>
+    </div>
+</section>

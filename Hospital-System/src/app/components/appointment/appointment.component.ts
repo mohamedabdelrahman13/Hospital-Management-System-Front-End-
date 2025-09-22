@@ -5,7 +5,7 @@ import { PatientService } from '../../services/PatientService/patient.service';
 import { patient } from '../../models/patient-model/patient';
 import { doctor } from '../../models/doctor/doctor';
 import { DoctorService } from '../../services/doctorService/doctor.service';
-import { doctorViewModel } from '../../viewModels/doctor/doctorViewModel';
+import { UserViewModel } from '../../viewModels/user/userViewModel';
 import { AppointmentService } from '../../services/appointmentService/appointment.service';
 import { ToastrService } from 'ngx-toastr';
 import { response } from '../../models/response/response';
@@ -23,7 +23,7 @@ interface IOptions {
 })
 export class AppointmentComponent implements OnInit {
   private response!: any
-  public doctor!: doctorViewModel;
+  public doctor!: UserViewModel;
   public doctorName!: string;
   public patientName!: string;
   public appCost!:number;

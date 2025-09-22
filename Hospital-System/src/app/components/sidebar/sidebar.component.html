@@ -38,6 +38,10 @@
         <mat-icon matListItemIcon class="mx-2">calendar_today</mat-icon>
         <span matListItemTitle>App.Schedule</span>
       </a>
+      <a mat-list-item  [routerLink]="['/hospital-system/manageUsers']"  routerLinkActive="router-link-active" *ngIf="isAdmin">
+        <mat-icon matListItemIcon class="mx-2">group</mat-icon>
+        <span matListItemTitle>Manage accounts</span>
+      </a>
       <a mat-list-item (click)="logout()">
         <mat-icon matListItemIcon class="mx-2" >logout</mat-icon>
         <span matListItemTitle>Logout</span>

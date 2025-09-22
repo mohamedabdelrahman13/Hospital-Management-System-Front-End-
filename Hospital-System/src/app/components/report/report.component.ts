@@ -12,35 +12,35 @@ import html2canvas from 'html2canvas';
   templateUrl: './report.component.html',
   styleUrl: './report.component.css'
 })
-export class ReportComponent implements OnInit{
+export class ReportComponent implements OnInit {
 
-  selectedView:string = 'daily';
+  selectedView: string = 'daily';
   today: Date = new Date();
-  heighestPatientRegisterationMonth!:string;
-  heighestPatientRegisterationDay!:string;
-  heighestAppStatsMonth!:string;
-  heighestAppStatsDay!:string
-  heighestRevenueDay!:string;
-  heighestRevenueMonth!:string;
-  patientsNumber!:number;
-  staffNumber!:number;
-  averageCost!:number;
+  heighestPatientRegisterationMonth!: string;
+  heighestPatientRegisterationDay!: string;
+  heighestAppStatsMonth!: string;
+  heighestAppStatsDay!: string
+  heighestRevenueDay!: string;
+  heighestRevenueMonth!: string;
+  patientsNumber!: number;
+  staffNumber!: number;
+  averageCost!: number;
 
   @ViewChild('report') reportElement!: ElementRef;
-  public patientsTrendStats!:patientStatsDTO[];
-  public appStats!:appointmentStatsDTO[];
-  public revenueStats!:revenueDTO[];
-  constructor(private dashboardService:DashboardService){
+  public patientsTrendStats!: patientStatsDTO[];
+  public appStats!: appointmentStatsDTO[];
+  public revenueStats!: revenueDTO[];
+  constructor(private dashboardService: DashboardService) {
 
   }
 
   ngOnInit(): void {
 
     //patient Registeration Trends ............
-    this.dashboardService.getPatientsStats(this.selectedView).subscribe((resp)=>{
+    this.dashboardService.getPatientsStats(this.selectedView).subscribe((resp) => {
       this.patientsTrendStats = resp;
-      
-      const heighestDay = this.patientsTrendStats.reduce((max , current) => {
+
+      const heighestDay = this.patientsTrendStats.reduce((max, current) => {
         return current.numberOfPatients > max.numberOfPatients ? current : max;
       })
       this.heighestPatientRegisterationDay = heighestDay.time;
@@ -48,10 +48,10 @@ export class ReportComponent implements OnInit{
     //patient Registeration Trends ............
 
     //Appointments Stats ...........
-    this.dashboardService.getAppointmentsStats(this.selectedView).subscribe((resp)=>{
+    this.dashboardService.getAppointmentsStats(this.selectedView).subscribe((resp) => {
       this.appStats = resp;
-      
-      const heighestDay = this.appStats.reduce((max , current) => {
+
+      const heighestDay = this.appStats.reduce((max, current) => {
         return current.numberOfAppointments > max.numberOfAppointments ? current : max;
       })
       this.heighestAppStatsDay = heighestDay.time;
@@ -60,9 +60,9 @@ export class ReportComponent implements OnInit{
 
 
     //Revenue Distribution Stats .........
-    this.dashboardService.getRevenueStats(this.selectedView).subscribe((resp)=>{
+    this.dashboardService.getRevenueStats(this.selectedView).subscribe((resp) => {
       this.revenueStats = resp;
-      const heighestDay = this.revenueStats.reduce((max , current) => {
+      const heighestDay = this.revenueStats.reduce((max, current) => {
         return current.revenue > max.revenue ? current : max;
       })
       this.heighestRevenueDay = heighestDay.time;
@@ -78,19 +78,19 @@ export class ReportComponent implements OnInit{
   }
 
 
-  updateStats(view:string){
+  updateStats(view: string) {
     //patient Registeration Trends .......
-    this.dashboardService.getPatientsStats(view).subscribe((resp)=>{
+    this.dashboardService.getPatientsStats(view).subscribe((resp) => {
       this.patientsTrendStats = resp;
-      if(view === 'monthly'){
-        const heighestMonth = this.patientsTrendStats.reduce((max , current) => {
+      if (view === 'monthly') {
+        const heighestMonth = this.patientsTrendStats.reduce((max, current) => {
           return current.numberOfPatients > max.numberOfPatients ? current : max;
         })
         this.heighestPatientRegisterationMonth = heighestMonth.time;
       }
-      
-      else if(view === 'daily'){
-        const heighestDay = this.patientsTrendStats.reduce((max , current) => {
+
+      else if (view === 'daily') {
+        const heighestDay = this.patientsTrendStats.reduce((max, current) => {
           return current.numberOfPatients > max.numberOfPatients ? current : max;
         })
         this.heighestPatientRegisterationDay = heighestDay.time;
@@ -98,41 +98,41 @@ export class ReportComponent implements OnInit{
     })
     //patient Registeration Trends .......
 
-    
+
 
     //Appointments Stats ......
-    this.dashboardService.getAppointmentsStats(view).subscribe((resp)=>{
+    this.dashboardService.getAppointmentsStats(view).subscribe((resp) => {
       this.appStats = resp;
-      if(view === 'monthly'){
-        const heighestMonth = this.appStats.reduce((max , current) => {
+      if (view === 'monthly') {
+        const heighestMonth = this.appStats.reduce((max, current) => {
           return current.numberOfAppointments > max.numberOfAppointments ? current : max;
         })
         this.heighestAppStatsMonth = heighestMonth.time;
       }
-      
-      if(view === 'daily'){
-        const heighestDay = this.appStats.reduce((max , current) => {
+
+      if (view === 'daily') {
+        const heighestDay = this.appStats.reduce((max, current) => {
           return current.numberOfAppointments > max.numberOfAppointments ? current : max;
         })
         this.heighestAppStatsDay = heighestDay.time;
       }
     })
     //Appointments Stats ......
-    
-    
-    
-    
+
+
+
+
     //Revenue Stats ......
-    this.dashboardService.getRevenueStats(view).subscribe((resp)=>{
+    this.dashboardService.getRevenueStats(view).subscribe((resp) => {
       this.revenueStats = resp;
-      if(view === 'monthly'){
-        const heighestMonth = this.revenueStats.reduce((max , current) => {
+      if (view === 'monthly') {
+        const heighestMonth = this.revenueStats.reduce((max, current) => {
           return current.revenue > max.revenue ? current : max;
         })
         this.heighestRevenueMonth = heighestMonth.time;
       }
-      if(view === 'daily'){
-        const heighestDay = this.revenueStats.reduce((max , current) => {
+      if (view === 'daily') {
+        const heighestDay = this.revenueStats.reduce((max, current) => {
           return current.revenue > max.revenue ? current : max;
         })
         this.heighestRevenueDay = heighestDay.time;
@@ -146,13 +146,31 @@ export class ReportComponent implements OnInit{
     const report = this.reportElement.nativeElement;
     html2canvas(report, { scale: 2 }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
-      const pdfWidth = 210;
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight]);
-      const imgProps = (pdf as any).getImageProperties(imgData);
-      // const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      //set A4 Dimentions
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+
+      // Convert pixel dimensions to mm (keeping aspect ratio)
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      //we add first page
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+      }
       pdf.save('Hospital-Report.pdf');
     });
   }

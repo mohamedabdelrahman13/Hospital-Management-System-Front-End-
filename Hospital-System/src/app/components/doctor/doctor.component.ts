@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../../services/doctorService/doctor.service';
-import { doctorViewModel } from '../../viewModels/doctor/doctorViewModel';
+import { UserViewModel } from '../../viewModels/user/userViewModel';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { department } from '../../models/department/department';
@@ -15,7 +15,7 @@ import { DepartmentService } from '../../services/DepartmentService/department.s
 export class DoctorComponent implements OnInit{
   public selectedDepartment:string = 'Medical and Surgical';
   public departments!:department[];
-  public doctors!:doctorViewModel[];
+  public doctors!:UserViewModel[];
   public patientId!:string | null;
   constructor(private doctorService:DoctorService,
     private toastr:ToastrService

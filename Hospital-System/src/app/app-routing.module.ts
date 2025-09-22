@@ -20,6 +20,7 @@ import { CardPaymentComponent } from './components/card-payment/card-payment.com
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ReportComponent } from './components/report/report.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -39,6 +40,7 @@ const routes: Routes = [
         ]
       },
 
+      { path: 'manageUsers', component: UserDetailsComponent, canActivate: [roleGuard], data: { roles: ["Admin"] } },
       { path: 'report', component: ReportComponent, canActivate: [roleGuard], data: { roles: ["Admin"] } },
       { path: 'patient-details/:patientId', component: PatientDetailsComponent, canActivate: [roleGuard], data: { roles: ["Staff"] } },
       { path: 'register', component: RegisterComponent, canActivate: [roleGuard], data: { roles: ["Admin"] } },

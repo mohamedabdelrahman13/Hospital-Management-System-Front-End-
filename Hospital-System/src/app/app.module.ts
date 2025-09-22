@@ -49,6 +49,7 @@ import { PatientDetailsComponent } from './components/patient-details/patient-de
 import { ReportComponent } from './components/report/report.component';
 import { authorizationInterceptor } from './Interceptors/authorization.interceptor';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
     CardPaymentComponent,
     PatientDetailsComponent,
     ReportComponent,
-    UnauthorizedComponent,  
+    UnauthorizedComponent,
+    UserDetailsComponent,  
   ],
   imports: [
     MatFormFieldModule,

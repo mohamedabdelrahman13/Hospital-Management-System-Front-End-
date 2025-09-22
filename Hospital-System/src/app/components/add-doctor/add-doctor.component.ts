@@ -4,7 +4,7 @@ import { DepartmentService } from '../../services/DepartmentService/department.s
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DoctorService } from '../../services/doctorService/doctor.service';
 import { ToastrService } from 'ngx-toastr';
-import { doctorViewModel } from '../../viewModels/doctor/doctorViewModel';
+import { UserViewModel } from '../../viewModels/user/userViewModel';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
 export class AddDoctorComponent implements OnInit {
 
   
-  public doctorsWithoutProfiles!:doctorViewModel[]
+  public doctorsWithoutProfiles!:UserViewModel[]
   public addDoctorForm!: FormGroup;
   public departments!: department[]
   public daysOfWeek:string[] = []
