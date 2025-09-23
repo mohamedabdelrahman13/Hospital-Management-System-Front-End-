@@ -50,6 +50,7 @@ export class AppointmentComponent implements OnInit {
     })
 
 
+    //make the EndDate automatically set to start time + 30 mins
     this.appointmentForm.get('startTime')?.valueChanges.subscribe((start: Date) => {
       if (start) {
         const end = new Date(start);
@@ -63,6 +64,7 @@ export class AppointmentComponent implements OnInit {
         this.patientName = pat.name;
       });
     }
+    
     if (doctorId) {
       this.doctorService.getDoctorByUserId(doctorId).subscribe(doc => {
         this.doctor = doc;

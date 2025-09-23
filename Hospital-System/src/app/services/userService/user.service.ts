@@ -16,7 +16,7 @@ export class UserService {
     return this.http.get<response>(`${environment.apiUrl}/api/Account/FilterUsers/${query}`);
   }
 
-  deleteUser(userId:string){
-    return this.http.post<response>(`${environment.apiUrl}/api/Account/DeleteUser/${userId}` , '');
+  updateUserStatus(userId:string , newState:string){
+    return this.http.put<response>(`${environment.apiUrl}/api/Account/UpdateUser/${userId}/${newState}` , '');
   }
 }

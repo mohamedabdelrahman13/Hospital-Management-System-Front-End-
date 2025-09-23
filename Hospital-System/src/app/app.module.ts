@@ -29,7 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
-import { DepartmentComponent } from './components/department/department.component';
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -43,7 +42,6 @@ import { AppointmentScheduleComponent } from './components/appointment-schedule/
 import { DatePipe } from '@angular/common';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SuccessComponent } from './components/success/success.component';
-import { HistoryComponent } from './components/history/history.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ReportComponent } from './components/report/report.component';
@@ -64,7 +62,6 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     EditPatientComponent,
     DashboardComponent,
     DoctorComponent,
-    DepartmentComponent,
     AppointmentComponent,
     AddDoctorComponent,
     LoginComponent,
@@ -73,7 +70,6 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     AppointmentScheduleComponent,
     CheckoutComponent,
     SuccessComponent,
-    HistoryComponent,
     CardPaymentComponent,
     PatientDetailsComponent,
     ReportComponent,

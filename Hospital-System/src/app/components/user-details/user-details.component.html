@@ -38,8 +38,8 @@
                             @else{
                                 <td class="text-danger">Deleted</td>
                             }
-                            <td><button [class.disabled]="user.isDeleted === true" class="delete-btn"  (click)="deleteUser(user.id)"> Delete </button></td>
-                            <td><button [class.disabled]="user.isDeleted === true" class="btn"  (click)="deleteUser(user.id)"> Restore </button></td>
+                            <td><button [class.disabled]="user.isDeleted === true" class="delete-btn"  (click)="updateUser(user.id , 'Delete')"> Delete </button></td>
+                            <td><button [class.disabled]="user.isDeleted === false" class="btn"  (click)="updateUser(user.id , 'Restore')"> Restore </button></td>
                         </tr>
                     }
                     @empty{

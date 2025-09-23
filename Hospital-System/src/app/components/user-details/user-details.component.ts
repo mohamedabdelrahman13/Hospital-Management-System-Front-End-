@@ -51,10 +51,9 @@ export class UserDetailsComponent implements OnInit{
   }
 
 
-  deleteUser(userId:string){
-    this.userService.deleteUser(userId).subscribe((resp) => {
+  updateUser(userId:string , newState:string){
+    this.userService.updateUserStatus(userId , newState).subscribe((resp) => {
       this.response = resp;
-
       if(this.response.statusCode === 200){
         this.toastr.success(this.response.message);
       }

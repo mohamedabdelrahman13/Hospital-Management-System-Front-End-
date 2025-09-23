@@ -26,10 +26,11 @@ export class AddDoctorComponent implements OnInit {
     , private toastr: ToastrService
     ,private datePipe: DatePipe
   ) {
+
+    //days to choose from them days for consultation Hours...
     this.daysOfWeek = ['saturday' , 'sunday' , 'monday' , 'tuesday' , 'wednesday' , 'thursday' , 'friday' ]
   }
   ngOnInit(): void {
-    
     this.addDoctorForm = this.fb.group({
       departmentID: ['', Validators.required],
       userId:['' , Validators.required],
@@ -40,7 +41,6 @@ export class AddDoctorComponent implements OnInit {
     this.doctorService.getAllDoctorsWithoutProfile().subscribe(d => 
       {
         this.doctorsWithoutProfiles = d;
-        console.log(this.doctorsWithoutProfiles)
       });
       
     this.deptService.getAllDepts().subscribe((depts) => {
@@ -96,6 +96,7 @@ export class AddDoctorComponent implements OnInit {
       },
 
       error: (err) => {
+        this.toastr.error('error while saving data');
         console.log(err);
       }
     })

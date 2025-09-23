@@ -17,12 +17,12 @@ import { patientStatsDTO } from '../../models/patientStatsDTO/patientStatsDTO';
 export class DashboardComponent implements OnInit {
 
 
+  public selectedView: string = 'daily';
 
   public totalPatients!:number
   public totalStaff!:number
   public averageCost!:number
 
-  public selectedView: string = 'daily';
 
   //dept stats...
   public deptStatsLabels!: string[];
@@ -178,12 +178,15 @@ export class DashboardComponent implements OnInit {
   }
   
   
+  // updates the values based on the view 
   updateStats(view: string) {
     this.dashboardService.getRevenueStats(view).subscribe((res) => {
       // assign the time to labels and revenue to data 
       this.revenueLabels = res.map(x => x.time);
       this.revenueData = res.map(x => x.revenue);
       this.assignRevenueChart(this.revenueLabels , this.revenueData);
+
+      // get total Revenue
       this.totalRevenue = this.revenueData.reduce((acc , current) => acc + current);
     })
     

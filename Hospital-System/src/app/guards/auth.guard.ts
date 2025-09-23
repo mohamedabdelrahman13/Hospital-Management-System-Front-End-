@@ -9,6 +9,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const toastr = inject(ToastrService)
 
+  // checks the current state first .. then check the if token is valid 
   if(authService.isLoggedIn()){
     if(authService.isTokenExpired()){
       authService.logoutWithExpiry();

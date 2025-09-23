@@ -6,7 +6,6 @@ import { SearchPatientComponent } from './components/search-patient/search-patie
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
-import { DepartmentComponent } from './components/department/department.component';
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { AddDoctorComponent } from './components/add-doctor/add-doctor.component';
 import { LoginComponent } from './components/login/login.component';

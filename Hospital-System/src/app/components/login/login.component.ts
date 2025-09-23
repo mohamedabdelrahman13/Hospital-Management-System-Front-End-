@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit{
           this.authService.saveToken(this.response.token);
 
           
+          // redirect User based on the role 
           if(this.authService.isInRole('Admin')){
             this.router.navigate(['/hospital-system/dashboard']);
             this.authService.getUserEmail();

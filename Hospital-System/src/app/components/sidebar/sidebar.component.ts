@@ -26,8 +26,6 @@ export class SidebarComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.authService.isInRole('Admin');
-    // this.authService.$checkRoles().subscribe((roleStatus) => this.checkIsInRole = roleStatus);
 
     this.isAdmin = this.authService.isInRole('Admin');
     this.isDoctor = this.authService.isInRole('Doctor');
@@ -39,7 +37,6 @@ export class SidebarComponent implements OnInit{
     this.authService.logout();
     console.log(this.authService.isLoggedIn());
     this.router.navigateByUrl('/login');
-    // console.log(this.isInRole);
     this.toastr.success('logged out');
   
   }

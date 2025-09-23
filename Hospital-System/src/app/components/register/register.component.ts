@@ -29,6 +29,8 @@ export class RegisterComponent implements OnInit{
       phoneNumber : ['' , [Validators.required ,  Validators.pattern(/^[0-9]{11}$/)]],
       role : ['', Validators.required]
     })
+
+    // fetch roles 
     this.authService.getRoles().subscribe(roles => this.roles = roles);
 
   }
