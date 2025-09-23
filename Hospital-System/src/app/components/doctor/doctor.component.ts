@@ -37,7 +37,12 @@ export class DoctorComponent implements OnInit{
 
 
   goToAppointment(doctorId:string){
+    if(this.patientId){
     this.router.navigateByUrl(`/hospital-system/appointment/${this.patientId}/${doctorId}`);
+    }
+    else{
+      this.toastr.info('Please choose the patient first')
+    }
   }
 
 
@@ -46,8 +51,6 @@ export class DoctorComponent implements OnInit{
       next:(docs) => {this.doctors = docs;},
       error:(err) => {this.toastr.error('error retrieving data from server')}
     })
-
-    console.log(this.selectedDepartment)
   }
 
 

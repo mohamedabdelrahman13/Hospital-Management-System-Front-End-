@@ -36,7 +36,7 @@
           <h6 class="card-text">
             <h6 class="text-success">available on:</h6>
             @for (ch of doc.doctorProfile.consultationHours; track $index; let last = $last) {
-            {{ ch.dayOfWeek }} ({{ ch.startTime }} - {{ ch.endTime }})<span *ngIf="!last">, </span>
+            {{ ch.dayOfWeek }} ({{ ch.startTime }} - {{ ch.endTime }})<span *ngIf="!last">, </span><br>
             }
           </h6>
 

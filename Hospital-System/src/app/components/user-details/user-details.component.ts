@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserDetailsComponent implements OnInit{
 
-  private response!:response
+  public response!:response
   public filteredUsers!:UserViewModel[];
   public searchText!:string;
   public searchSubject = new Subject<string>();
@@ -35,7 +35,16 @@ export class UserDetailsComponent implements OnInit{
   filterUsers(query:string){
     if(query){
        this.userService.filterUsers(query).subscribe({
-          next:(users) => {this.filteredUsers = users ; console.log(users)},
+          next:(resp) => {
+            this.response = resp;
+
+            if(this.response.statusCode === 200){
+              this.filteredUsers = this.response.data;
+            }
+            else {
+              this.filteredUsers = [];
+            }
+          },
           error:(err) => {console.log(err)}
         })
     } 

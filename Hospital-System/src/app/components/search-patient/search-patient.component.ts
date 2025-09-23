@@ -3,6 +3,7 @@ import { patient } from '../../models/patient-model/patient';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { PatientService } from '../../services/PatientService/patient.service';
 import { Router } from '@angular/router';
+import { response } from '../../models/response/response';
 
 @Component({
   selector: 'app-search-patient',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class SearchPatientComponent {
 
+  public response!:response;
   public filteredPatients!: patient[];
   public patientsList!: patient[];
   private subscriptions: Subscription[];
@@ -36,7 +38,18 @@ export class SearchPatientComponent {
   filterPatients(query:string){
     if(query){
      var subsctription2 = this.patientService.searchPatientsByName(query).subscribe({
-          next:(patients) => {this.filteredPatients = patients},
+          next:(resp) => {
+            this.response = resp;
+
+            // this.filterPatients = this.response.data;
+            if(this.response.statusCode === 200){
+              this.filteredPatients = this.response.data;
+            }
+            else{
+              this.filteredPatients = [];
+            }
+          
+          },
           error:(err) => {console.log(err)}
         })
 

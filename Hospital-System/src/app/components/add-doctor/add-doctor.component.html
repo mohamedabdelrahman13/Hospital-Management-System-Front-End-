@@ -3,6 +3,19 @@
         <legend class="text-center">Add Doctor Profile</legend>
         <div class="row mb-3">
             <div class="col-12 col-md-6">
+                <label for="dept" class="form-label">user name</label>
+                <select id="userName" class="form-select" formControlName="userId" aria-label="Default select example">
+                    <option value="" selected disabled>select user</option>
+                    @for(d of doctorsWithoutProfiles ; track d.id){
+                    <option [value]="d.id">{{d.userName}}</option>
+                    }
+                </select>
+                <div *ngIf="addDoctorForm.get('userId')?.touched && addDoctorForm.get('userId')?.invalid"
+                    class="text-danger">
+                    <small *ngIf="addDoctorForm.get('userId')?.errors?.['required']">user is required</small>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
                 <label for="dept" class="form-label">Department</label>
                 <select class="form-select" formControlName="departmentID" aria-label="Default select example">
                     <option value="" selected disabled>select department</option>
@@ -16,19 +29,7 @@
                         required</small>
                 </div>
             </div>
-            <div class="col-12 col-md-6">
-                <label for="dept" class="form-label">user name</label>
-                <select id="userName" class="form-select" formControlName="userId" aria-label="Default select example">
-                    <option value="" selected disabled>select user</option>
-                    @for(d of doctorsWithoutProfiles ; track d.id){
-                    <option [value]="d.id">{{d.userName}}</option>
-                    }
-                </select>
-                <div *ngIf="addDoctorForm.get('userId')?.touched && addDoctorForm.get('userId')?.invalid"
-                    class="text-danger">
-                    <small *ngIf="addDoctorForm.get('userId')?.errors?.['required']">user is required</small>
-                </div>
-            </div>
+           
         </div>
         <div class="mb-3">
             <label for="cost" class="form-label">cost</label>

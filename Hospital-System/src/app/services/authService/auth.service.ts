@@ -39,11 +39,11 @@ export class AuthService {
   }
 
   saveToken(token: string) {
-    localStorage.setItem(this.tokenKey, token);
+    sessionStorage.setItem(this.tokenKey, token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return sessionStorage.getItem(this.tokenKey);
   }
 
 
@@ -79,13 +79,9 @@ export class AuthService {
     const token = this.getToken();
     if (!token) return true;
 
-    try {
       const decoded:any = jwtDecode(token);
-      const expiry = decoded.exp * 1000; // convert seconds → ms
+      const expiry = decoded.exp * 1000; // convert seconds to ms
       return Date.now() > expiry;
-    } catch (err) {
-      return true; // invalid token
-    }
   }
 
   logoutWithExpiry(): void {
@@ -107,7 +103,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.tokenKey);
   }
 
   isInRole(role: string): boolean {

@@ -10,11 +10,6 @@ import { AppointmentService } from '../../services/appointmentService/appointmen
 import { ToastrService } from 'ngx-toastr';
 import { response } from '../../models/response/response';
 import { DatePipe } from '@angular/common';
-interface IOptions {
-  hstep: number[];
-  mstep: number[];
-  sstep: number[];
-}
 @Component({
   selector: 'app-appointment',
   standalone: false,
@@ -59,7 +54,6 @@ export class AppointmentComponent implements OnInit {
       if (start) {
         const end = new Date(start);
         end.setMinutes(start.getMinutes() + 30);
-  
         this.appointmentForm.get('endTime')?.setValue(end, { emitEvent: false });
       }
     });

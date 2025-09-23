@@ -38,12 +38,13 @@
                             @else{
                                 <td class="text-danger">Deleted</td>
                             }
-                            <td><a class="btn btn-danger" (click)="deleteUser(user.id)"> Delete </a></td>
+                            <td><button [class.disabled]="user.isDeleted === true" class="delete-btn"  (click)="deleteUser(user.id)"> Delete </button></td>
+                            <td><button [class.disabled]="user.isDeleted === true" class="btn"  (click)="deleteUser(user.id)"> Restore </button></td>
                         </tr>
                     }
                     @empty{
                       <div class="emptyMessage c-danger text-center">
-                         <h4>no user with specified name </h4>
+                         <h4>{{response.message}}</h4>
                       </div>
                     }
                   </tbody>

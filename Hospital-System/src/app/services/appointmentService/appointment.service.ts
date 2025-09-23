@@ -21,13 +21,13 @@ export class AppointmentService {
     return this.http.post(`${environment.apiUrl}/api/Appointment/CheckAvailability` , appoin);
   }
 
-  GetdoctorAppointments(id:string | null){
-    return this.http.get<appSchedule[]>(`${environment.apiUrl}/api/Appointment/GetAppointmentByUserId/${id}`);
+  getAllDates(){
+    return this.http.get<string[]>(`${environment.apiUrl}/api/Appointment/GetAllAppsDates`);
   }
-  markAsCompleted(id:string | null){
-    return this.http.post<response>(`${environment.apiUrl}/api/Appointment/MarkCompleted/${id}` , '');
+  GetdoctorAppointments(id:string | null , appDate:string | null){
+    return this.http.get<appSchedule[]>(`${environment.apiUrl}/api/Appointment/GetAppointmentByUserId/${id}/${appDate}`);
   }
-  markAsCancelled(id:string | null){
-    return this.http.post<response>(`${environment.apiUrl}/api/Appointment/MarkCancelled/${id}` , '');
+  modifyAppointmentStatus(appId:string | null , newStatus:string | null){
+    return this.http.put<response>(`${environment.apiUrl}/api/Appointment/ModifyAppointmentStatus/${appId}/${newStatus}` , '');
   }
 }

@@ -13,7 +13,7 @@ export class UserService {
 
 
   filterUsers(query:string){
-    return this.http.get<UserViewModel[]>(`${environment.apiUrl}/api/Account/FilterUsers/${query}`);
+    return this.http.get<response>(`${environment.apiUrl}/api/Account/FilterUsers/${query}`);
   }
 
   deleteUser(userId:string){

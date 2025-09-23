@@ -11,6 +11,9 @@
     padding-left: 10px;
   }
   
+  .disabled-inputs{
+    opacity: .5;
+  }
   .appointment-item {
     font-weight: 900;
     padding: 6px 10px;

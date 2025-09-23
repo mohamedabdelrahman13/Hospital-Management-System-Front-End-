@@ -4,6 +4,7 @@ import { patient } from '../../models/patient-model/patient';
 import { environment } from '../../environments/environment';
 import { addPatientModel } from '../../models/patient-model/addPatientModel';
 import { patientDetailsDTO } from '../../models/patient-model/patientDetailsDTO';
+import { response } from '../../models/response/response';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class PatientService {
   }
 
   searchPatientsByName(query:string){
-    return this.http.get<patient[]>(`${environment.apiUrl}/api/Patient/SearchPatientsByName/${query}`);
+    return this.http.get<response>(`${environment.apiUrl}/api/Patient/SearchPatientsByName/${query}`);
   }
 
   addPatient(patient:addPatientModel){

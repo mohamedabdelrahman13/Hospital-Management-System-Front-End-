@@ -6,6 +6,14 @@
   </div>
 </Header>
 <div class="appointments-container">  
+
+  <label for="viewSelect" class="mx-2">select date :</label>
+  <select id="viewSelect" class="form-select w-25" [(ngModel)]="selectedDate" (change)="updateApps(selectedDate)">
+    @for(date of allDates ; track $index){
+      <option [value]="date">{{date}}</option>
+    }
+  </select>
+
     @for(app of appointments ; track app.id){
     <div class="appointment-card" >
       <div class="appointment-header">
@@ -27,10 +35,13 @@
       </p>
 
       <div class="appointment-actions">
-        <button (click)="markCompleted(app.id)" class="btn me-3" >Mark as Completed</button>
-        <button (click)="markCancelled(app.id)" class="btn" >Mark as Cancelled</button>
+        <button (click)="modifyAppStatus(app.id , 'Completed')" class="btn me-3" >Mark as Completed</button>
+        <button (click)="modifyAppStatus(app.id , 'Cancelled')" class="btn" >Mark as Cancelled</button>
       </div>
     </div>
+}
+@empty{
+  <h2 class="my-3">There are no appointments on that day</h2>
 }
 </div>
   

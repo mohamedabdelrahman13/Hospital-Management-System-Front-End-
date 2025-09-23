@@ -10,23 +10,25 @@
             }
         </div>
         </div>
-        <div class="row mb-3 " >
-            <div class="mb-3 col-md-6">
-                <label for="doctorName" class="form-label">Doctor</label>
-                <input type="text" id="doctorName" class="form-control" [value]="doctorName" disabled>
+        <div class="disabled-inputs">
+            <div class="row mb-3 ">
+                <div class="mb-3 col-md-6">
+                    <label for="doctorName" class="form-label">Doctor</label>
+                    <input type="text" id="doctorName" class="form-control" [value]="doctorName" disabled>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="speciality" class="form-label">Speciality</label>
+                    <input type="text" id="speciality" class="form-control" [value]="speciality" disabled>
+                </div>
             </div>
-            <div class="mb-3 col-md-6">
-                <label for="speciality" class="form-label">Speciality</label>
-                <input type="text" id="speciality" class="form-control" [value]="speciality" disabled>
+            <div class="mb-3">
+                <label for="patientName" class="form-label">Patient</label>
+                <input type="text" id="patientName" class="form-control" [value]="patientName" disabled>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="patientName" class="form-label">Patient</label>
-            <input type="text" id="patientName" class="form-control" [value]="patientName" disabled>
-        </div>
-        <div class="mb-3">
-            <label for="cost" class="form-label">Cost in EGP</label>
-            <input type="text" id="cost" class="form-control" [value]="this.appCost" disabled>
+            <div class="mb-3">
+                <label for="cost" class="form-label">Cost in EGP</label>
+                <input type="text" id="cost" class="form-control" [value]="this.appCost" disabled>
+            </div>
         </div>
         <div class="mb-3">
             <div class="mb-3">
