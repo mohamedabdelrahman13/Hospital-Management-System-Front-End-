@@ -63,7 +63,9 @@ export class LoginComponent implements OnInit{
           this.toastr.error(this.response.message);
         }
       },
-      error:(err)=>{console.log(err)}
+      error:(err)=>{console.log(err)
+      this.toastr.error('error retireving data from server');
+      }
      })
 
 

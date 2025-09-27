@@ -85,7 +85,9 @@ export class DashboardComponent implements OnInit {
           position: 'bottom',
           labels: {
             color: '#555',
-            font: { size: 14 }
+            font: { 
+              size: 14 , 
+            }
           }
         }
       }
@@ -98,7 +100,10 @@ export class DashboardComponent implements OnInit {
               position: 'top',
               labels: {
                 color: '#555',  // legend text color
-                font: { size: 14 }
+                font: { 
+                  size: 14 ,
+                  weight:'bold'
+                }
               }
             }
           },
