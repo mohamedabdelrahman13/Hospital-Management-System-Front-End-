@@ -9,6 +9,7 @@
     <div class="my-2 d-flex justify-content-flex-start align-items-center">
       <label for="viewSelect" class="mx-2">Speciality :</label>
       <select id="viewSelect" class="form-select w-50" [(ngModel)]="selectedDepartment" (change)="updateDoctors(selectedDepartment)">
+        <option disabled selected value="">Choose speciality</option>
         @for (dept of departments; track dept.id) {
           <option [value]="dept.name">{{dept.ar_Name}}</option>
         }

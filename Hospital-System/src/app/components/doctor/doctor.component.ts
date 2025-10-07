@@ -13,7 +13,7 @@ import { DepartmentService } from '../../services/DepartmentService/department.s
   styleUrl: './doctor.component.css'
 })
 export class DoctorComponent implements OnInit{
-  public selectedDepartment:string = 'Medical and Surgical';
+  public selectedDepartment:string = '';
   public departments!:department[];
   public doctors!:UserViewModel[];
   public patientId!:string | null;
@@ -26,12 +26,9 @@ export class DoctorComponent implements OnInit{
 
     
   ngOnInit(): void {
-    this.patientId = this.activeatedRoute.snapshot.paramMap.get('patientId')
-    this.doctorService.getAllDoctorsWithProfile(this.selectedDepartment).subscribe({
-      next:(docs) => {this.doctors = docs;},
-      error:(err) => {this.toastr.error('error retrieving data from server')}
-    })
-
+   
+    
+    this.patientId = this.activeatedRoute.snapshot.paramMap.get('patientId');
     this.departmentService.getAllDepts().subscribe((depts) => this.departments = depts)
   }
 
